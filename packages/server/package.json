@@ -11,20 +11,25 @@
   },
   "dependencies": {
     "await-exec": "^0.1.2",
+    "axios": "^0.21.4",
+    "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.0",
     "concurrently": "^6.2.1",
+    "config": "^3.3.6",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.17.3",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
-    "express": "~4.16.1",
+    "express": "^4.17.1",
+    "gravatar": "^1.8.2",
     "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.12",
+    "mongoose": "^6.0.5",
     "morgan": "~1.9.1",
-    "regenerator-runtime": "^0.13.9"
+    "regenerator-runtime": "^0.13.9",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.15.4",
