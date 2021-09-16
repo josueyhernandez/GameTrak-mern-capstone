@@ -5,7 +5,8 @@ import Button from "react-bootstrap/Button"
 import { useApiFetch } from "util/api"
 import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
-import "./HomePage.css" 
+import "../index.css"
+import "./Homepage.css" 
 
 export default function HomePage(props) {
   const {error, isLoading, response} = useApiFetch("/sample")
@@ -45,6 +46,7 @@ export default function HomePage(props) {
               onChange = {(e) => setPassword(e.target.value)}
               />
             </Form.Group>
+            <Button>SignUp</Button>
             <Button block size="lg" type="submit" class="button" disabled={!validateForm()}>Login</Button>
           </Form>
         </div>
