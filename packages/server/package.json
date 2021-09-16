@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "await-exec": "^0.1.2",
-    "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
     "bcryptjs": "^2.4.3",
     "chalk": "^4.1.0",
