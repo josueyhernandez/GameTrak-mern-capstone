@@ -1,0 +1,22 @@
+.login {
+    padding: 60px 0;
+}
+
+.login form {
+    margin: 0 auto;
+    max-width: 320px;
+}
+
+.button {
+    background-color: skyblue;
+    color: black
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: rgb(95, 195, 235);
+}
+
+.passWordForm {
+    margin-top: 20px;
+}
