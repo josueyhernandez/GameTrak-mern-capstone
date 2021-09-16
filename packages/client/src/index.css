@@ -1,6 +1,50 @@
-
 /* Your CSS Here */
 
 main {
   text-align: center;
+}
+h1 {
+  color: darkgreen;
+  font-family: optima;
+  font-size: 80px;
+}
+div {
+  color: black;
+  vertical-align: top;
+  text-align: right;
+}
+button {
+  background-color: #4caf50; /* Green */
+  border: 5px solid darkgreen;
+
+  color: black;
+  padding: 25px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 50%;
+  transition-duration: 0.4s;
+}
+button:hover {
+  background-color: #4caf50; /* Green */
+  color: white;
+}
+#logout {
+  background-color: black;
+  color: lime;
+  border-radius: 10px;
+  border-color: black;
+  padding: 10px 10px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  transition-duration: 0.4s;
+}
+#logout:hover {
+  background-color: black;
+  color: white;
+}
+body {
+  background-color: rgb(144, 174, 163);
 }
