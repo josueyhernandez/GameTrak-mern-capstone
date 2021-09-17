@@ -39,7 +39,6 @@ app.use(express.static(path.join(__dirname, '../../client/build')));
 
 // api router
 app.use(keys.app.apiEndpoint, router)
-
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
   next(createError(404, 'NotFound'))
