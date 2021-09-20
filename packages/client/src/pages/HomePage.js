@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d2356f6 (rebasing)
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -8,6 +11,7 @@ import LoadingSpinner from "components/LoadingSpinner";
 import { FaExclamationCircle } from "react-icons/fa";
 import "../index.css";
 import "./HomePage.css";
+<<<<<<< HEAD
 =======
 import React, { useState } from 'react'
 import Form from "react-bootstrap/Form"
@@ -18,6 +22,8 @@ import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
 >>>>>>> 463250d (Login setup)
+=======
+>>>>>>> d2356f6 (rebasing)
 
 export default function HomePage(props) {
   const { error, isLoading, response } = useApiFetch("/sample");
@@ -58,6 +64,9 @@ export default function HomePage(props) {
               />
             </Form.Group>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d2356f6 (rebasing)
             <Button>SignUp</Button>
             <Button
               block
@@ -68,9 +77,12 @@ export default function HomePage(props) {
             >
               Login
             </Button>
+<<<<<<< HEAD
 =======
             <Button block size="lg" type="submit" class="button" disabled={!validateForm()}>Login</Button>
 >>>>>>> 463250d (Login setup)
+=======
+>>>>>>> d2356f6 (rebasing)
           </Form>
         </div>
       )}
