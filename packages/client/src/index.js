@@ -10,7 +10,11 @@ ReactDOM.render(
     <BrowserRouter>  
       <Switch>
         <Route exact path='/' component={HomePage} />
+<<<<<<< HEAD
         <Route exact path='/register' component={RegisterPage} />
+=======
+        <Route exact path='/register' component={RegisterPage}/>
+>>>>>>> 222dce1 (added to index)
         { /* Add more routes here */} 
       </Switch>
     </BrowserRouter>
