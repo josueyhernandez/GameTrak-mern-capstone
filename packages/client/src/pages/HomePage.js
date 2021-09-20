@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
@@ -7,6 +8,16 @@ import LoadingSpinner from "components/LoadingSpinner";
 import { FaExclamationCircle } from "react-icons/fa";
 import "../index.css";
 import "./HomePage.css";
+=======
+import React, { useState } from 'react'
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+// import { ToastContainer, toast } from "react-toastify" 
+import { useApiFetch } from "util/api"
+import LoadingSpinner from 'components/LoadingSpinner'
+import { FaExclamationCircle } from 'react-icons/fa'
+import "./HomePage.css" 
+>>>>>>> 463250d (Login setup)
 
 export default function HomePage(props) {
   const { error, isLoading, response } = useApiFetch("/sample");
@@ -46,6 +57,7 @@ export default function HomePage(props) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
+<<<<<<< HEAD
             <Button>SignUp</Button>
             <Button
               block
@@ -56,6 +68,9 @@ export default function HomePage(props) {
             >
               Login
             </Button>
+=======
+            <Button block size="lg" type="submit" class="button" disabled={!validateForm()}>Login</Button>
+>>>>>>> 463250d (Login setup)
           </Form>
         </div>
       )}
