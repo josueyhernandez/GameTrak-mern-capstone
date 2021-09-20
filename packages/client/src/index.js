@@ -10,7 +10,7 @@ ReactDOM.render(
     <BrowserRouter>  
       <Switch>
         <Route exact path='/' component={HomePage} />
-        <Route exact path='/register' component={RegisterPage}/>
+        <Route exact path='/register' component={RegisterPage} />
         { /* Add more routes here */} 
       </Switch>
     </BrowserRouter>
