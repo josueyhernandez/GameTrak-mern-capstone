@@ -42,18 +42,34 @@ export default function RegisterPage() {
             <Form.Group size="lg" controlId="username">
             <Form.Label>Username: </Form.Label>
             <Form.Control 
-            autoFocus
-            type = "username"
-            value= {username}
-            onChange = {(e) => handleInputChange(e.target.value)}
+              autoFocus
+              type = "username"
+              value= {username}
+              onChange = {(e) => handleInputChange(e.target.value)}
             />
             </Form.Group>
             <Form.Group size="lg" controlId="password" class="passWordForm">
               <Form.Label class="password">Password: </Form.Label>
               <Form.Control
-              type="password"
-              value={password}
-              onChange = {(e) => handleInputChange(e.target.value)}
+                type="password"
+                value={password}
+                onChange = {(e) => handleInputChange(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group size="lg" controlId="confirm" class="passWordForm">
+              <Form.Label class="confirm">Confirm Password: </Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange = {(e) => handleInputChange(e.target.value)}
+              />
+            </Form.Group>
+            <Form.Group size="lg" controlId="email" class="emailForm">
+              <Form.Label class="confirm">Confirm Password: </Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange = {(e) => handleInputChange(e.target.value)}
               />
             </Form.Group>
             <Button block size="lg" type="submit" class="button" disabled={!validateForm()}>Login</Button>
