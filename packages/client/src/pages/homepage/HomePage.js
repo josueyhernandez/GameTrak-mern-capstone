@@ -46,10 +46,16 @@ export default function HomePage(props) {
               />
             </Form.Group>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 <<<<<<< HEAD
 >>>>>>> cd50266 (rebasing -m)
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> d2356f6 (rebasing)
+>>>>>>> e809760 (rebasing -m)
             <Button>SignUp</Button>
             <Button
               block
@@ -61,12 +67,20 @@ export default function HomePage(props) {
               Login
             </Button>
 <<<<<<< HEAD
+<<<<<<< HEAD
             <Button block size="lg" type="submit" class="button" disabled={!validateForm()}>Login</Button>
 =======
 =======
             <Button block size="lg" type="submit" class="button" disabled={!validateForm()}>Login</Button>
 >>>>>>> 463250d (Login setup)
 >>>>>>> cd50266 (rebasing -m)
+=======
+=======
+            <Button block size="lg" type="submit" class="button" disabled={!validateForm()}>Login</Button>
+>>>>>>> 463250d (Login setup)
+=======
+>>>>>>> d2356f6 (rebasing)
+>>>>>>> e809760 (rebasing -m)
           </Form>
         </div>
       )}
