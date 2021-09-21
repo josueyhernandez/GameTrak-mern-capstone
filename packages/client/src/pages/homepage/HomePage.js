@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 281c3aa (rebased)
 import React, { useState } from 'react'
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
@@ -7,6 +10,7 @@ import { useApiFetch } from "util/api"
 import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
+<<<<<<< HEAD
 =======
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
@@ -18,6 +22,8 @@ import { FaExclamationCircle } from "react-icons/fa";
 import "../index.css";
 import "./HomePage.css";
 >>>>>>> fb8ed40 (rebased changes)
+=======
+>>>>>>> 281c3aa (rebased)
 
 export default function HomePage(props) {
   const { error, isLoading, response } = useApiFetch("/sample");
@@ -57,6 +63,7 @@ export default function HomePage(props) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 
@@ -72,6 +79,8 @@ export default function HomePage(props) {
             >
               Login
             </Button>
+=======
+>>>>>>> 281c3aa (rebased)
             <Button block size="lg" type="submit" class="button" disabled={!validateForm()}>Login</Button>
 <<<<<<< HEAD
 
