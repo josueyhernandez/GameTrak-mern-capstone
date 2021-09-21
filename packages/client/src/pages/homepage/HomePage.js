@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from 'react'
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
@@ -6,6 +7,17 @@ import { useApiFetch } from "util/api"
 import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
+=======
+import React, { useState } from "react";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
+// import { ToastContainer, toast } from "react-toastify"
+import { useApiFetch } from "util/api";
+import LoadingSpinner from "components/LoadingSpinner";
+import { FaExclamationCircle } from "react-icons/fa";
+import "../index.css";
+import "./HomePage.css";
+>>>>>>> da321fb (rebased)
 
 export default function HomePage(props) {
   const { error, isLoading, response } = useApiFetch("/sample");
