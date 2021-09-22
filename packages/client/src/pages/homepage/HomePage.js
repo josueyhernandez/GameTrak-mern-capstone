@@ -7,6 +7,7 @@ import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
 
+
 export default function HomePage(props) {
   const { error, isLoading, response } = useApiFetch("/sample");
   const [username, setUsername] = useState("");
