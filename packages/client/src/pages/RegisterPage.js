@@ -8,12 +8,12 @@ import {
   Button,
   ToastBody,
 } from "react-bootstrap"
-//import useRouter from 'hooks/useRouter'
 import { useProvideAuth } from 'hooks/useAuth'
 //import { LandingHeader, LoadingSpinner } from 'components'
 //import { setAuthToken } from 'utils/axiosConfig'
 //import AvatarPicker from 'components/AvatarPicker/AvatarPicker'
 import { toast } from 'react-toastify'
+import useRouter from 'hooks/useRouter'
 
 
 const initialState = {
@@ -28,6 +28,7 @@ const initialState = {
 export default function RegisterPage() {
     const [data, setData] = useState(initialState)
     const auth = useProvideAuth()
+    const router = useRouter()
 
 
     const handleInputChange = (event) => {
@@ -52,6 +53,7 @@ export default function RegisterPage() {
           isSubmitting: true,
           errorMassage: null,
         })
+        router.push("/")
         try {
           //const res = await auth.signup(data.username, data.email, data.password)
           setData({
@@ -62,6 +64,11 @@ export default function RegisterPage() {
           console.log(data)
         } catch (error) {
           toast.error(error.message)
+          setData({
+            ...data,
+            isSubmitting: false,
+            errorMessage: error.message
+          })
         }
       }
 
