@@ -38,13 +38,13 @@ export default function RegisterPage() {
 
     return (
         <div className="register">
-          <Form onSubmit = {handleSubmit}>
+          <Form>
             <Form.Group size="lg" controlId="username">
             <Form.Label>Username: </Form.Label>
             <Form.Control 
               autoFocus
               type = "username"
-              value= {username}
+              value= {data.username}
               onChange = {(e) => handleInputChange(e.target.value)}
             />
             </Form.Group>
@@ -52,7 +52,7 @@ export default function RegisterPage() {
               <Form.Label class="password">Password: </Form.Label>
               <Form.Control
                 type="password"
-                value={password}
+                value={data.password}
                 onChange = {(e) => handleInputChange(e.target.value)}
               />
             </Form.Group>
@@ -60,7 +60,7 @@ export default function RegisterPage() {
               <Form.Label class="confirm">Confirm Password: </Form.Label>
               <Form.Control
                 type="password"
-                value={password}
+                value={data.password}
                 onChange = {(e) => handleInputChange(e.target.value)}
               />
             </Form.Group>
@@ -68,11 +68,11 @@ export default function RegisterPage() {
               <Form.Label class="confirm">Confirm Password: </Form.Label>
               <Form.Control
                 type="email"
-                value={email}
+                value={data.email}
                 onChange = {(e) => handleInputChange(e.target.value)}
               />
             </Form.Group>
-            <Button block size="lg" type="submit" class="button" disabled={!validateForm()}>Login</Button>
+            <Button block size="lg" type="submit" class="button">Register</Button>
           </Form>
         </div>
     )
