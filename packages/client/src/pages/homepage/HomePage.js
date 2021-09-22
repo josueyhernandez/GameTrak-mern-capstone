@@ -1,17 +1,19 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-// import { ToastContainer, toast } from "react-toastify"
+import { ToastContainer, toast } from "react-toastify"
 import { useApiFetch } from "util/api";
 import LoadingSpinner from "components/LoadingSpinner";
 import { FaExclamationCircle } from "react-icons/fa";
-import "../index.css";
+// import "../index.css";
 import "./HomePage.css";
 
 export default function HomePage(props) {
+  const axios = require('axios');
   const { error, isLoading, response } = useApiFetch("/sample");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [loginStatus, setLoginStatus] = useState(0);
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
@@ -19,6 +21,21 @@ export default function HomePage(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+  }
+  async function testButton(){
+    
+     await axios.get('/api/users',{params:{
+      username: "Kitboga",
+      password: "Donotredeem"
+    }}).then(function(res){
+      if(res.data === true){
+        setLoginStatus(2)
+      }else{
+        setLoginStatus(1)
+      }
+    }).catch(function(err){
+      console.log(err)
+    })
   }
 
   return (
@@ -56,6 +73,9 @@ export default function HomePage(props) {
             >
               Login
             </Button>
+            <Button onClick = {testButton}>Test</Button>
+            {loginStatus === 1 && <div>YOU SUCK PAL</div>}
+            {loginStatus === 2 && <div>YOU ROCK PAL</div>}
           </Form>
         </div>
       )}
