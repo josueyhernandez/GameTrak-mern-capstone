@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import HomePage from 'pages/HomePage'
+import HomePage from './pages/homepage/HomePage'
 import RegisterPage from './pages/RegisterPage'
 import './index.css'
 
