@@ -20,10 +20,10 @@ export default function HomePage(props) {
     return username.length > 0 && password.length > 0;
   }
   async function loginBackend(){
-    await axios.get('/api/users',{params:{
+    await axios.post('/api/users/login',{
       username,
       password
-    }}).then(function(res){
+    }).then(function(res){
       if(res.data === true){
         setLoginStatus(2)
       }else{
@@ -41,7 +41,7 @@ export default function HomePage(props) {
   }
   async function testButton(){
     
-     await axios.get('/api/users',{params:{
+     await axios.get('/api/users/login',{params:{
       username: "Kitboga",
       password: "Donotredeem"
     }}).then(function(res){

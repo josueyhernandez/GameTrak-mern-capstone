@@ -1,6 +1,7 @@
 import express from 'express'
 import { User } from '../models'
-const bcrypt = require('bcrypt')
+import chalk from 'chalk'
+import bcrypt from 'bcryptjs'
 const { check, validationResult } = require('express-validator/check')
 const jwt = require('jsonwebtoken')
 const config = require('../config/keys')
@@ -8,8 +9,8 @@ const configJWT = config.jwt.secret
 const configExp = config.jwt.tokenLife
 const router = express.Router();
 // router.
-router.get('/', async (req, res) => {
-    const { username, password } = req.query
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body
     try {
         const userFound = await User.findOne({ username })
         const passCompare = await bcrypt.compare(password, userFound.password)
@@ -21,10 +22,12 @@ router.get('/', async (req, res) => {
 })
 router.post('/', async (req, res) => {
     const { username, password, email } = req.body
+    console.log(chalk.blue('round 1'))
     const superPassword = await bcrypt.hash(password, 12)
     try {
         const userExists = await User.findOne({ username })
         const emailExists = await User.findOne({ email })
+        console.log(chalk.blue('round 2'))
 
 
         if (!userExists && !emailExists) {
@@ -34,6 +37,7 @@ router.post('/', async (req, res) => {
                 email,
             })
             const savedUser = await user.save()
+            console.log(chalk.blue('round 3'))
             const payload = {
                 user: {
                     id: user.id
@@ -50,11 +54,11 @@ router.post('/', async (req, res) => {
                     if(err){
                         throw err;
                     }else{
-                        console.log({token})
-                        res.send(200)
+                        res.json({token})
                     }
                 }
                 )
+                console.log(chalk.blue('round 4'))
         } else {
             res.status(409).json(409)
         }
