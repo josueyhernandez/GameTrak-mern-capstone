@@ -1,12 +1,13 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { ToastContainer, toast } from "react-toastify"
-import { useApiFetch } from "util/api";
-import LoadingSpinner from "components/LoadingSpinner";
-import { FaExclamationCircle } from "react-icons/fa";
-// import "../index.css";
-import "./HomePage.css";
+
+import React, { useState } from 'react'
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+// import { ToastContainer, toast } from "react-toastify" 
+import { useApiFetch } from "util/api"
+import LoadingSpinner from 'components/LoadingSpinner'
+import { FaExclamationCircle } from 'react-icons/fa'
+import "./HomePage.css" 
+
 
 export default function HomePage(props) {
   const axios = require('axios');
@@ -63,6 +64,7 @@ export default function HomePage(props) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
+
             <Button>SignUp</Button>
             <Button
               block
