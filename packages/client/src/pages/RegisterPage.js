@@ -62,6 +62,7 @@ export default function RegisterPage() {
           isSubmitting: true,
           errorMessage: null,
         })
+        submitRegister();
         //Need to add authentication token later
 
       } catch (error) {
@@ -141,7 +142,7 @@ export default function RegisterPage() {
         </Form.Group>
         <Form.Group>
         <Button block size="lg" type="submit" className="button" onClick={goBack}>Back</Button>
-        <Button block size="lg" type="submit" className="button" onClick={submitRegister}>Register</Button>
+        <Button block size="lg" type="submit" className="button">Register</Button>
         </Form.Group>
         
       </Form>
