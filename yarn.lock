@@ -12008,6 +12008,11 @@ to-regex@^3.0.1, to-regex@^3.0.2:
     regex-not "^1.0.2"
     safe-regex "^1.1.0"
 
+toastify-js@^1.11.1:
+  version "1.11.1"
+  resolved "https://registry.yarnpkg.com/toastify-js/-/toastify-js-1.11.1.tgz#023a4ce64ecdead1d6d170072b62bd345088c427"
+  integrity sha512-O1UR06KEhFY9Vu2iKltgOE62+Vq/5iU7AOktouFkEegEisrqtNhEri9RpSd6u6wyPsd4Ae9RT1io3uwkMAlLVQ==
+
 toastify@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/toastify/-/toastify-2.0.1.tgz#bc9f2d7fcd91a7d9bc1e36ed86d0560297aa8584"

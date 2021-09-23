@@ -27,7 +27,7 @@ router.post('/', async (req, res) => {
         const emailExists = await User.findOne({ email })
 
 
-        if (!userExists || !emailExists) {
+        if (!userExists && !emailExists) {
             const user = new User({
                 username,
                 password: superPassword,
@@ -50,15 +50,16 @@ router.post('/', async (req, res) => {
                     if(err){
                         throw err;
                     }else{
-                        res.send({token})
+                        console.log({token})
+                        res.send(200)
                     }
                 }
                 )
         } else {
-            res.status(409).json("How dare you")
+            res.status(409).json(409)
         }
     } catch (err) {
-        res.status(406).send("Something messed up on our end.")
+        res.status(406).send(406)
     }
 })
 module.exports = router;

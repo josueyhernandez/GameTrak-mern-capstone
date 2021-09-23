@@ -48,3 +48,13 @@ button:hover {
 body {
   background-color: rgb(144, 174, 163);
 }
+.register {
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+}
+.register-form{
+  display: flex;
+  flex-direction: column;
+}
