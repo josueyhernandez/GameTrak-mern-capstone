@@ -53,15 +53,14 @@ export default function RegisterPage() {
           isSubmitting: true,
           errorMassage: null,
         })
-        router.push("/")
         try {
-          //const res = await auth.signup(data.username, data.email, data.password)
+          //const res = await auth.signup(data.username, data.email, data.password) [Do not delete]
           setData({
             ...data,
             isSubmitting: true,
             errorMessage: null,
           })
-          console.log(data)
+          router.push("/")
         } catch (error) {
           toast.error(error.message)
           setData({
