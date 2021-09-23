@@ -60,6 +60,7 @@ export default function RegisterPage() {
             isSubmitting: true,
             errorMessage: null,
           })
+          //Need to add authentication token later
           router.push("/")
         } catch (error) {
           toast.error(error.message)
