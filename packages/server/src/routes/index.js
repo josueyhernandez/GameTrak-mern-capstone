@@ -1,6 +1,8 @@
 import express from 'express'
 import { User } from '../models'
 import userRouter from './users'
+import gameRouter from './games'
+import authRouter from './auth'
 
 const router = express.Router()
 
@@ -21,5 +23,7 @@ router.get('/sample', async (req, res, next) => {
 
   res.status(200).send(user)
 })
-router.use('/users', userRouter);
+router.use('/users', userRouter)
+router.use('/games', gameRouter)
+router.use('/auth', authRouter)
 module.exports = router

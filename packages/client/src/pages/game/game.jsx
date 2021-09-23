@@ -13,7 +13,7 @@ class GamesPage extends Component {
 	render() {
 		const { collections } = this.state;
 		return (
-			<div className='game-page'>{collections.map({ id, ...collections })}</div>
+			<div className='game-page'>{collections.map({...collections })}</div>
 		);
 	}
 }
