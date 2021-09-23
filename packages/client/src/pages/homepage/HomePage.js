@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import { ToastContainer, toast } from "react-toastify"
-import { useApiFetch } from "util/api";
-import LoadingSpinner from "components/LoadingSpinner";
-import { FaExclamationCircle } from "react-icons/fa";
-// import "../index.css";
-import "./HomePage.css";
+import React, { useState } from 'react'
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+// import { ToastContainer, toast } from "react-toastify" 
+import { useApiFetch } from "util/api"
+import LoadingSpinner from 'components/LoadingSpinner'
+import { FaExclamationCircle } from 'react-icons/fa'
+import "./HomePage.css" 
+
 
 export default function HomePage(props) {
   const axios = require('axios');
@@ -63,7 +63,8 @@ export default function HomePage(props) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-            <Button>SignUp</Button>
+
+            <Button variant="primary" href = "/register">SignUp</Button>
             <Button
               block
               size="lg"
@@ -74,8 +75,8 @@ export default function HomePage(props) {
               Login
             </Button>
             <Button onClick = {testButton}>Test</Button>
-            {loginStatus === 1 && <div>YOU SUCK PAL</div>}
-            {loginStatus === 2 && <div>YOU ROCK PAL</div>}
+            {loginStatus === 1 && <div>LOGIN SUCCESS</div>}
+            {loginStatus === 2 && <div>LOGIN FAILED</div>}
           </Form>
         </div>
       )}
