@@ -7,9 +7,10 @@ import { useApiFetch } from "util/api"
 import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
-
+import UserSettings from 'hooks/globalStates'
 
 export default function HomePage(props) {
+  const {state} = UserSettings();
   const axios = require('axios');
   const { error, isLoading, response } = useApiFetch("/sample");
   const [username, setUsername] = useState("");
@@ -41,18 +42,7 @@ export default function HomePage(props) {
   }
   async function testButton(){
     
-     await axios.get('/api/users/login',{params:{
-      username: "Kitboga",
-      password: "Donotredeem"
-    }}).then(function(res){
-      if(res.data === true){
-        setLoginStatus(2)
-      }else{
-        setLoginStatus(1)
-      }
-    }).catch(function(err){
-      console.log(err)
-    })
+     console.log(state)
   }
 
   return (
@@ -99,6 +89,7 @@ export default function HomePage(props) {
             </Button>
             {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
             {loginStatus === 1 && <div>LOGIN FAILED</div>}
+            <Button onclick = {testButton}>t</Button>
           </Form>
         </div>
       )}
