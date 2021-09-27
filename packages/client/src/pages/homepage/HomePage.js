@@ -95,7 +95,7 @@ export default function HomePage(props) {
               className="button"
               disabled={!validateForm()}
             >
-              Login.
+              Login
             </Button>
             {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
             {loginStatus === 1 && <div>LOGIN FAILED</div>}
