@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Profiler, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 // import { ToastContainer, toast } from "react-toastify"
@@ -7,6 +7,7 @@ import LoadingSpinner from "components/LoadingSpinner";
 import { FaExclamationCircle } from "react-icons/fa";
 // import "../index.css";
 import "./HomePage.css";
+import image from "./profile.jpg";
 
 export default function HomePage(props) {
   const axios = require("axios");
@@ -62,6 +63,9 @@ export default function HomePage(props) {
 
   return (
     <main>
+      <h1>
+        <img src={image} alt="image"></img>
+      </h1>
       <h1>Welcome to GameTrak</h1>
       {error && <h3 style={{ color: "red" }}>Error Loading Data: {error}</h3>}
       {isLoading && <LoadingSpinner></LoadingSpinner>}
