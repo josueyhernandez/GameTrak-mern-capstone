@@ -7,7 +7,7 @@ export default function CreatePage() {
         <main>
             <h2 class="new">Create Your Own Character</h2>
             <div class="characterImg">
-                <h3>Character Name</h3>
+                <h3>Character Name:</h3>
 
             </div>
             <div class="characterInput">
