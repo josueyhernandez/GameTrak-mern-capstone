@@ -8,7 +8,7 @@ import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
 import { useProvideUser } from 'hooks/globalStates'
-
+import image from "./profile.jpg";
 
 export default function HomePage(props) {
   const axios = require('axios');
@@ -28,10 +28,8 @@ export default function HomePage(props) {
       })
       .then(function (res) {
         if (res.data.valid === true) {
-          console.log(res.data.user._id)
-          userReducer(state,"CHANGE_USER")
+          userReducer(res.data.user,"CHANGE_USER")
           setLoginStatus(2);
-          console.log(state)
 
         } else {
           setLoginStatus(1);
@@ -52,6 +50,9 @@ export default function HomePage(props) {
 
   return (
     <main>
+      <h1>
+        <img src={image} alt="image"></img>
+      </h1>
       <h1>Welcome to GameTrak</h1>
       {error && <h3 style={{ color: "red" }}>Error Loading Data: {error}</h3>}
       {isLoading && <LoadingSpinner></LoadingSpinner>}

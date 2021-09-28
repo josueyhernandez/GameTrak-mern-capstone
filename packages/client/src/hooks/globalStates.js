@@ -7,6 +7,7 @@ const initialState = {
 const userReducer = (state, action) =>{
     switch(action){
         case 'CHANGE_USER':
+            console.log(state)
             return {
                 ...state,
                 id: state._id,
