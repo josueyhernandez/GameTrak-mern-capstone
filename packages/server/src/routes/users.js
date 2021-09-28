@@ -15,7 +15,17 @@ router.post('/login', async (req, res) => {
         const userFound = await User.findOne({ username })
         const passCompare = await bcrypt.compare(password, userFound.password)
         console.log(config.jwt.secret)
-        res.send(passCompare)
+        if(passCompare && userFound){
+            res.send(
+                {
+               valid: passCompare, 
+               user: userFound
+            })
+        } else{
+            res.send({
+                valid: false
+            })
+        }
     }catch(err){
         res.send(err)
     }

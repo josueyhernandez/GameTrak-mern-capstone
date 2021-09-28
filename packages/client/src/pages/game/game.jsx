@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
-
+import { Button } from 'react-bootstrap';
 import GameData from './data';
 
-class GamesPage extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			collections: GameData,
-		};
+export default function GamesPage(props) {
+	
+	function createGame(){
+		console.log(GameData.type)
 	}
-	render() {
-		const { collections } = this.state;
-		return (
-			<div className='game-page'>{collections.map({...collections })}</div>
-		);
-	}
+	return(
+		<main>
+			<div className='game-page'>Hi</div>
+			<Button onClick = {createGame}>POWER</Button>
+			<div className = "game-list">
+				{GameData.type.map(game =>{
+				return (
+					<div className = "game">
+						{game.name}
+						<img height = "125px" width = "100px" src = {game.imageUrl}></img>
+					</div>
+					)
+			})}
+			</div>
+		</main>
+			
+	)
 }
 
-export default GamesPage;

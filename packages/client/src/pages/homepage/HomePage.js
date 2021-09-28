@@ -1,21 +1,22 @@
-import React, { Profiler, useState } from "react";
-import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-// import { ToastContainer, toast } from "react-toastify"
-import { useApiFetch } from "util/api";
-import LoadingSpinner from "components/LoadingSpinner";
-import { FaExclamationCircle } from "react-icons/fa";
-// import "../index.css";
-import "./HomePage.css";
+
+import React, { useState } from 'react'
+import Form from "react-bootstrap/Form"
+import Button from "react-bootstrap/Button"
+// import { ToastContainer, toast } from "react-toastify" 
+import { useApiFetch } from "util/api"
+import LoadingSpinner from 'components/LoadingSpinner'
+import { FaExclamationCircle } from 'react-icons/fa'
+import "./HomePage.css" 
+import { useProvideUser } from 'hooks/globalStates'
 import image from "./profile.jpg";
 
 export default function HomePage(props) {
-  const axios = require("axios");
+  const axios = require('axios');
   const { error, isLoading, response } = useApiFetch("/sample");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(0);
-
+  const { state, userReducer} = useProvideUser()
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
@@ -26,8 +27,10 @@ export default function HomePage(props) {
         password,
       })
       .then(function (res) {
-        if (res.data === true) {
+        if (res.data.valid === true) {
+          userReducer(res.data.user,"CHANGE_USER")
           setLoginStatus(2);
+
         } else {
           setLoginStatus(1);
         }
@@ -37,28 +40,12 @@ export default function HomePage(props) {
       });
   }
   function handleSubmit(event) {
-    console.log(username, password);
     loginBackend();
     event.preventDefault();
   }
-  async function testButton() {
-    await axios
-      .get("/api/users/login", {
-        params: {
-          username: "Kitboga",
-          password: "Donotredeem",
-        },
-      })
-      .then(function (res) {
-        if (res.data === true) {
-          setLoginStatus(2);
-        } else {
-          setLoginStatus(1);
-        }
-      })
-      .catch(function (err) {
-        console.log(err);
-      });
+  async function testButton(){
+    
+     console.log(state)
   }
 
   return (
@@ -111,6 +98,7 @@ export default function HomePage(props) {
             </Button>
             {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
             {loginStatus === 1 && <div>LOGIN FAILED</div>}
+            <Button onClick = {testButton}>t</Button>
           </Form>
         </div>
       )}
