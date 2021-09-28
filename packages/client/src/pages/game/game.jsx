@@ -7,13 +7,17 @@ class GamesPage extends Component {
 		super(props);
 
 		this.state = {
-			collections: GameData,
+			collections: GameData.type,
 		};
 	}
 	render() {
 		const { collections } = this.state;
 		return (
-			<div className='game-page'>{collections.map({ id, ...collections })}</div>
+			<div className='game-page'>
+				{collections.map((game) => (
+					<div key={game.id}>{game.name}</div>
+				))}
+			</div>
 		);
 	}
 }
