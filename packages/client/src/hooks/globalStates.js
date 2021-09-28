@@ -1,4 +1,6 @@
 import React, { useReducer, useContext, createContext, useEffect } from 'react'
+// import axios - refer to snippets useAuth hook for hints
+
 const initialState = {
     id: null,
     username: null,
@@ -14,6 +16,8 @@ const userReducer = (state, action) =>{
                 username: action.info.username,
                 image: action.info.image
             }
+        default: 
+            return state;
     }
 
 }
@@ -35,8 +39,11 @@ export default function ProvideUser({children}) {
 
 export const useProvideUser = () =>{
     const {state, dispatch} = useUser();
+
+    //create functions that call to the backend with axios for frontend use
     return{
         state,
+        dispatch,
         userReducer
     }
 }

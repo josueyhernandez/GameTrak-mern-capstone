@@ -9,14 +9,14 @@ import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
 import { useProvideUser } from 'hooks/globalStates'
 import image from "./profile.jpg";
+const axios = require('axios');
 
 export default function HomePage(props) {
-  const axios = require('axios');
   const { error, isLoading, response } = useApiFetch("/sample");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(0);
-  const { state, userReducer} = useProvideUser()
+  const { state,dispatch, userReducer} = useProvideUser()
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
