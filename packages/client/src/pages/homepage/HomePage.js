@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
@@ -9,9 +8,8 @@ import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
 import { useProvideUser } from 'hooks/globalStates'
 import image from "./profile.jpg";
-
+const axios = require('axios');
 export default function HomePage(props) {
-  const axios = require('axios');
   const { error, isLoading, response } = useApiFetch("/sample");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -30,7 +28,6 @@ export default function HomePage(props) {
         if (res.data.valid === true) {
           userReducer(state,{type: "CHANGE_USER", info: res.data.user})
           setLoginStatus(2);
-
         } else {
           setLoginStatus(1);
         }
@@ -47,7 +44,6 @@ export default function HomePage(props) {
     
      console.log(state)
   }
-
   return (
     <main>
       <h1>
@@ -76,7 +72,6 @@ export default function HomePage(props) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-
             <Button
               block
               size="lg"
@@ -91,7 +86,7 @@ export default function HomePage(props) {
               block
               size="lg"
               type="submit"
-              class="login"
+              className="button"
               disabled={!validateForm()}
             >
               Login
