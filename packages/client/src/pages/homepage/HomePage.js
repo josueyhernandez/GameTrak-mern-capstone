@@ -7,36 +7,41 @@ import { useApiFetch } from "util/api"
 import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
-import UserSettings from 'hooks/globalStates'
+import { useProvideUser } from 'hooks/globalStates'
+
 
 export default function HomePage(props) {
-  const {state} = UserSettings();
   const axios = require('axios');
   const { error, isLoading, response } = useApiFetch("/sample");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(0);
-
+  const { state, userReducer} = useProvideUser()
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
-  async function loginBackend(){
-    await axios.post('/api/users/login',{
-      username,
-      password
-    }).then(function(res){
-      if(res.data === true){
-        setLoginStatus(2)
-      }else{
-        setLoginStatus(1)
-      }
-    }).catch(function(err){
-      console.log(err)
-    })
+  async function loginBackend() {
+    await axios
+      .post("/api/users/login", {
+        username,
+        password,
+      })
+      .then(function (res) {
+        if (res.data.valid === true) {
+          console.log(res.data.user._id)
+          userReducer(state,"CHANGE_USER")
+          setLoginStatus(2);
+          console.log(state)
 
+        } else {
+          setLoginStatus(1);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
   function handleSubmit(event) {
-    console.log(username, password)
     loginBackend();
     event.preventDefault();
   }
@@ -71,13 +76,16 @@ export default function HomePage(props) {
               />
             </Form.Group>
 
-            <Button 
-            block
-            size="lg"
-            type="submit"
-            className="button"
-            onClick={() => window.location.replace("/register")}
-            variant="primary">SignUp</Button>
+            <Button
+              block
+              size="lg"
+              type="submit"
+              className="button"
+              onClick={() => window.location.replace("/register")}
+              variant="primary"
+            >
+              SignUp
+            </Button>
             <Button
               block
               size="lg"
@@ -89,7 +97,7 @@ export default function HomePage(props) {
             </Button>
             {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
             {loginStatus === 1 && <div>LOGIN FAILED</div>}
-            <Button onclick = {testButton}>t</Button>
+            <Button onClick = {testButton}>t</Button>
           </Form>
         </div>
       )}

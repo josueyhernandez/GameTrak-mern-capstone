@@ -58,3 +58,18 @@ body {
   display: flex;
   flex-direction: column;
 }
+.game{
+  text-align: center;
+  width: 150px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: black solid 5px;
+}
+.game-list{
+  display: flex;
+  justify-content:space-evenly;
+}

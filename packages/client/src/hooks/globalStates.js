@@ -1,25 +1,41 @@
 import React, { useReducer, useContext, createContext, useEffect } from 'react'
 const initialState = {
+    id: null,
     username: null,
     image: null
 }
-const reducer = (state, action) =>{
+const userReducer = (state, action) =>{
     switch(action){
         case 'CHANGE_USER':
-            return state
+            return {
+                ...state,
+                id: state._id,
+                username: state.username,
+                image: state.image
+            }
     }
 
 }
 const userContext = createContext()
-export default function ProvideUser(props) {
-    const [state, dispatch] = useReducer(reducer, initialState)
+export const useUser = () => {
+    return useContext(userContext)
+  }
+export default function ProvideUser({children}) {
+    const [state, dispatch] = useReducer(userReducer, initialState)
     return (
         <userContext.Provider value={{
                 state,
                 dispatch,
             }}>
-                {props.children}
+                {children}
         </userContext.Provider>
     )
 }
 
+export const useProvideUser = () =>{
+    const {state, dispatch} = useUser();
+    return{
+        state,
+        userReducer
+    }
+}
