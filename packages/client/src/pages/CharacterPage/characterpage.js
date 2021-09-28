@@ -1,6 +1,7 @@
 
 import React from "react";
 import "./characterpage.css"
+import scorpion from "./images/scorpion.jpg"
 
 export default function CharacterPage() {
     function selectCharacter() {
@@ -19,9 +20,9 @@ export default function CharacterPage() {
             <div class="header">
                 <h3><a href="/character">Character</a></h3>
                 <h3><a href="/item">Items</a></h3>
-                <h3><a href="places">Places</a></h3>
-                <h3><a href="skills">Skills</a></h3>
-                <h3><a href="attributes">Attributes</a></h3>
+                <h3><a href="/places">Places</a></h3>
+                <h3><a href="/skills">Skills</a></h3>
+                <h3><a href="/attributes">Attributes</a></h3>
             </div>
             <div class="character-select">
                 <label for="character">Select Character: </label>
@@ -34,7 +35,7 @@ export default function CharacterPage() {
                 </select>
                 <button class="submit" onClick={selectCharacter()}>Submit</button>
             </div>
-                <button class="create">Create New</button>
+                <h2><a href="/create" class="create">Create New</a></h2>
 
                 <div>
                     <h1 class="game-title">Mortal Kombat</h1>
@@ -51,7 +52,7 @@ export default function CharacterPage() {
                     <div class="description">
                         <p>Description</p>
                     </div>
-                    <img src="./images/scorpion.jpg" alt="Scorpion" />
+                    <img src={scorpion} alt="Scorpion" />
                 </div>
         </main>
 

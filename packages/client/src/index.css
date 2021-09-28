@@ -14,7 +14,7 @@ div {
   text-align: right;
 }
 button {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50; 
   border: 5px solid darkgreen;
 
   color: black;
@@ -27,7 +27,7 @@ button {
   transition-duration: 0.4s;
 }
 button:hover {
-  background-color: #4caf50; /* Green */
+  background-color: #4caf50;
   color: white;
 }
 #logout {

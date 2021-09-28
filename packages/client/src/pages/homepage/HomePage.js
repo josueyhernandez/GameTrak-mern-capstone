@@ -91,7 +91,7 @@ export default function HomePage(props) {
               block
               size="lg"
               type="submit"
-              className="button"
+              class="login"
               disabled={!validateForm()}
             >
               Login
