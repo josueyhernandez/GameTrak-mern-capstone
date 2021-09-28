@@ -5,14 +5,14 @@ const initialState = {
     image: null
 }
 const userReducer = (state, action) =>{
-    switch(action){
+    switch(action.type){
         case 'CHANGE_USER':
-            console.log(state)
+            console.log(action.info.username)
             return {
                 ...state,
-                id: state._id,
-                username: state.username,
-                image: state.image
+                id: action.info._id,
+                username: action.info.username,
+                image: action.info.image
             }
     }
 

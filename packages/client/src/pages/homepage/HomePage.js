@@ -28,7 +28,7 @@ export default function HomePage(props) {
       })
       .then(function (res) {
         if (res.data.valid === true) {
-          userReducer(res.data.user,"CHANGE_USER")
+          userReducer(state,{type: "CHANGE_USER", info: res.data.user})
           setLoginStatus(2);
 
         } else {
