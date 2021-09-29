@@ -34,6 +34,9 @@ export default function RegisterPage() {
   const axios = require('axios');
   const colorScheme = useStyle();
 
+  //Sets Id of body
+  document.body.setAttribute("id", colorScheme.getStyle())
+
   const handleInputChange = (event) => {
     console.log(event)
     setData({
@@ -102,6 +105,13 @@ export default function RegisterPage() {
     window.location.replace("/")
   }
 
+  //Changes color scheme whenever color is selected
+  function setColor(color){
+    console.log(color.target.value)
+    colorScheme.setNewStyle(color.target.value)
+    document.body.id = colorScheme.getStyle()
+  }
+
   return (
 
     <div className="register" id={colorScheme.getStyle()}>
@@ -148,6 +158,11 @@ export default function RegisterPage() {
         </Form.Group>
         
       </Form>
+      <select name="color" onChange={setColor}>
+        <option value="green">Green</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+      </select>
       <ToastContainer
         position="top-right"
         autoClose={5000}

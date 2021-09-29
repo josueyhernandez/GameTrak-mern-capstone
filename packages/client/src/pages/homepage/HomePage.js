@@ -18,7 +18,8 @@ export default function HomePage(props) {
   const [loginStatus, setLoginStatus] = useState(0);
   const colorScheme = useStyle();
 
-  document.body.setAttribute("id", colorScheme.style)
+  //Sets color Scheme of body
+  document.body.setAttribute("id", colorScheme.getStyle())
 
   function validateForm() {
     return username.length > 0 && password.length > 0;
@@ -59,6 +60,7 @@ export default function HomePage(props) {
     })
   }
 
+  //Changes color scheme of page when selected
   function setColor(color){
     console.log(color.target.value)
     colorScheme.setNewStyle(color.target.value)
