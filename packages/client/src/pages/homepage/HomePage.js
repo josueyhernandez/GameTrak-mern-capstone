@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button"
 import { useApiFetch } from "util/api"
 import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
-import { useStyle } from 'hooks/useStyle'
+import { useProvideStyle } from 'hooks/useStyle'
 import "./HomePage.css" 
 
 
@@ -16,7 +16,9 @@ export default function HomePage(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(0);
-  const colorScheme = useStyle();
+  const colorScheme = useProvideStyle();
+
+  console.log(colorScheme)
 
   //Sets color Scheme of body
   document.body.setAttribute("id", colorScheme.getStyle())

@@ -1,15 +1,34 @@
-import { useState } from 'react'
+import { useState, useContext, createContext, useEffect } from 'react'
+
+const initialState = {
+    color: "green"
+}
+
+export const StyleContext = createContext()
+
+StyleContext.displayName = "StyleContext"
 
 
-export function useStyle() {
-    const [style, setStyle] = useState("green")
+export function ProvideStyle({ children }) {
+    const [style] = initialState
+    return (
+        <StyleContext.Provider value ={{style}}>{children}</StyleContext.Provider>
+    )
+}
 
+export const useStyle = () => {
+    return useContext(StyleContext)
+}
+
+export function useProvideStyle() {
+    let style = useStyle()
+    
     function getStyle() {
-        return style
+        return localStorage.getItem("style")
     }
 
     function setNewStyle(color) {
-        setStyle(color)
+        localStorage.setItem("style", color)
     }
 
     return {

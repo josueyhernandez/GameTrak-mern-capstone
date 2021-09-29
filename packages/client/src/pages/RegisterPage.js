@@ -15,7 +15,7 @@ import { useProvideAuth } from 'hooks/useAuth'
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import useRouter from 'hooks/useRouter'
-import { useStyle } from 'hooks/useStyle';
+import { useProvideStyle } from 'hooks/useStyle';
 
 
 const initialState = {
@@ -32,8 +32,9 @@ export default function RegisterPage() {
   const auth = useProvideAuth()
   const router = useRouter()
   const axios = require('axios');
-  const colorScheme = useStyle();
+  const colorScheme = useProvideStyle();
 
+  console.log(colorScheme)
   //Sets Id of body
   document.body.setAttribute("id", colorScheme.getStyle())
 
