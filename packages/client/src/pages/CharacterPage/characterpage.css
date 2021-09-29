@@ -1,0 +1,76 @@
+.log {
+    display: flex;
+}
+
+.logout {
+    margin-right: 10px
+}
+
+.header {
+    display: flex;
+    justify-content: space-evenly;
+    border-bottom: 2px solid black;
+}
+
+.character-select {
+    display: flex;
+    margin-top: 10px;
+}
+
+.game-title {
+    text-align: center;
+}
+
+.characterId {
+    text-align: center;
+}
+
+.description {
+    text-align: center
+}
+
+.create {
+    background-color: white;
+    border-radius: 0px;
+    border: 1px black solid;
+    height: 50px;
+    width: 100px;
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    font-size: 20px;
+}
+
+.create:hover {
+    background-color: #4caf50; /* Green */
+    color: white;
+    transition-duration: 0.4s;
+}
+
+.scorpionImg {
+    float: left;
+    padding: 0px;
+    margin: 0px
+}
+
+.submit,
+.logout,
+.back {
+    padding: 0px;
+    margin: 0px;
+    border: none;
+    border-radius: 0%;
+    background-color: rgb(247, 241, 241);
+    height: 20px;
+    font-size: 15px;
+    border: 1px solid rgb(179, 172, 172);
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color: black
+}

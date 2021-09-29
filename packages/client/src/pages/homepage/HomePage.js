@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
@@ -8,10 +7,10 @@ import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
 import { useProvideStyle } from 'hooks/useStyle'
 import "./HomePage.css" 
-
-
+import { useProvideUser } from 'hooks/globalStates'
+import image from "./profile.jpg";
+const axios = require('axios');
 export default function HomePage(props) {
-  const axios = require('axios');
   const { error, isLoading, response } = useApiFetch("/sample");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -22,55 +21,49 @@ export default function HomePage(props) {
 
   //Sets color Scheme of body
   document.body.setAttribute("id", colorScheme.getStyle())
-
+  
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
-  async function loginBackend(){
-    await axios.post('/api/users/login',{
-      username,
-      password
-    }).then(function(res){
-      if(res.data === true){
-        setLoginStatus(2)
-      }else{
-        setLoginStatus(1)
-      }
-    }).catch(function(err){
-      console.log(err)
-    })
-
+  async function loginBackend() {
+    await axios
+      .post("/api/users/login", {
+        username,
+        password,
+      })
+      .then(function (res) {
+        if (res.data.valid === true) {
+          userReducer(state,{type: "CHANGE_USER", info: res.data.user})
+          setLoginStatus(2);
+        } else {
+          setLoginStatus(1);
+        }
+      })
+      .catch(function (err) {
+        console.log(err);
+      });
   }
   function handleSubmit(event) {
-    console.log(username, password)
     loginBackend();
     event.preventDefault();
   }
   async function testButton(){
     
-     await axios.get('/api/users/login',{params:{
-      username: "Kitboga",
-      password: "Donotredeem"
-    }}).then(function(res){
-      if(res.data === true){
-        setLoginStatus(2)
-      }else{
-        setLoginStatus(1)
-      }
-    }).catch(function(err){
-      console.log(err)
-    })
+     console.log(state)
   }
-
+  
   //Changes color scheme of page when selected
   function setColor(color){
     console.log(color.target.value)
     colorScheme.setNewStyle(color.target.value)
     document.body.id = colorScheme.getStyle()
   }
-
+  
   return (
     <main>
+      <h1>
+        <img src={image} alt="image"></img>
+      </h1>
       <h1>Welcome to GameTrak</h1>
       {error && <h3 style={{ color: "red" }}>Error Loading Data: {error}</h3>}
       {isLoading && <LoadingSpinner></LoadingSpinner>}
@@ -94,14 +87,16 @@ export default function HomePage(props) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-
-            <Button 
-            block
-            size="lg"
-            type="submit"
-            className="button"
-            onClick={() => window.location.replace("/register")}
-            variant="primary">SignUp</Button>
+            <Button
+              block
+              size="lg"
+              type="submit"
+              className="button"
+              onClick={() => window.location.replace("/register")}
+              variant="primary"
+            >
+              SignUp
+            </Button>
             <Button
               block
               size="lg"
@@ -113,6 +108,7 @@ export default function HomePage(props) {
             </Button>
             {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
             {loginStatus === 1 && <div>LOGIN FAILED</div>}
+            <Button onClick = {testButton}>t</Button>
           </Form>
           <select name="color" onChange={setColor}>
             <option value="green">Green</option>
