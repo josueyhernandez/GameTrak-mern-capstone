@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button"
 import { useApiFetch } from "util/api"
 import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
+import { useProvideStyle } from 'hooks/useStyle'
 import "./HomePage.css" 
 import { useProvideUser } from 'hooks/globalStates'
 import image from "./profile.jpg";
@@ -14,7 +15,13 @@ export default function HomePage(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(0);
-  const { state, userReducer} = useProvideUser()
+  const colorScheme = useProvideStyle();
+
+  console.log(colorScheme)
+
+  //Sets color Scheme of body
+  document.body.setAttribute("id", colorScheme.getStyle())
+  
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
@@ -44,6 +51,14 @@ export default function HomePage(props) {
     
      console.log(state)
   }
+  
+  //Changes color scheme of page when selected
+  function setColor(color){
+    console.log(color.target.value)
+    colorScheme.setNewStyle(color.target.value)
+    document.body.id = colorScheme.getStyle()
+  }
+  
   return (
     <main>
       <h1>
@@ -53,7 +68,7 @@ export default function HomePage(props) {
       {error && <h3 style={{ color: "red" }}>Error Loading Data: {error}</h3>}
       {isLoading && <LoadingSpinner></LoadingSpinner>}
       {!error && response && (
-        <div className="login">
+        <div className="login" id={colorScheme.getStyle()}>
           <Form onSubmit={handleSubmit}>
             <Form.Group size="lg" controlId="username">
               <Form.Label>Username: </Form.Label>
@@ -95,6 +110,11 @@ export default function HomePage(props) {
             {loginStatus === 1 && <div>LOGIN FAILED</div>}
             <Button onClick = {testButton}>t</Button>
           </Form>
+          <select name="color" onChange={setColor}>
+            <option value="green">Green</option>
+            <option value="red">Red</option>
+            <option value="blue">Blue</option>
+          </select>
         </div>
       )}
     </main>

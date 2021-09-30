@@ -15,6 +15,7 @@ import { useProvideAuth } from 'hooks/useAuth'
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import useRouter from 'hooks/useRouter'
+import { useProvideStyle } from 'hooks/useStyle';
 
 
 const initialState = {
@@ -31,6 +32,11 @@ export default function RegisterPage() {
   const auth = useProvideAuth()
   const router = useRouter()
   const axios = require('axios');
+  const colorScheme = useProvideStyle();
+
+  console.log(colorScheme)
+  //Sets Id of body
+  document.body.setAttribute("id", colorScheme.getStyle())
 
   const handleInputChange = (event) => {
     console.log(event)
@@ -100,9 +106,16 @@ export default function RegisterPage() {
     window.location.replace("/")
   }
 
+  //Changes color scheme whenever color is selected
+  function setColor(color){
+    console.log(color.target.value)
+    colorScheme.setNewStyle(color.target.value)
+    document.body.id = colorScheme.getStyle()
+  }
+
   return (
 
-    <div className="register">
+    <div className="register" id={colorScheme.getStyle()}>
       <Form onSubmit={handleSignup} className="register-form">
         <h2>Welcome! Register Here</h2>
         <Form.Group size="lg" controlId="username">
@@ -146,6 +159,11 @@ export default function RegisterPage() {
         </Form.Group>
         
       </Form>
+      <select name="color" onChange={setColor}>
+        <option value="green">Green</option>
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+      </select>
       <ToastContainer
         position="top-right"
         autoClose={5000}
