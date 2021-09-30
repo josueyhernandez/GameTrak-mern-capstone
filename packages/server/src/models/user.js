@@ -4,7 +4,6 @@ const { ObjectId } = mongoose.Schema.Types
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
-    unique: true,
     required: true,
   },
   email: {
@@ -15,6 +14,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    default: "./profile.jpg"
+  }
   
 })
 
