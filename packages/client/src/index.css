@@ -42,9 +42,24 @@ button:hover {
   background-color: black;
   color: white;
 }
+
+
 body {
   background-color: rgb(144, 174, 163);
 }
+
+#green {
+  background-color: rgb(144, 174, 163);
+}
+
+#red {
+  background-color: pink;
+}
+
+#blue {
+  background-color: aqua;
+}
+
 .register {
   display: flex;
   height: 90vh;
