@@ -4,18 +4,24 @@ import React, { useReducer, useContext, createContext, useEffect } from 'react'
 const initialState = {
     id: null,
     username: null,
-    image: null
+    image: null,
+    games: null,
+    currentGame: null
 }
 const userReducer = (state, action) =>{
     switch(action.type){
         case 'CHANGE_USER':
             console.log(action.info.username)
+            localStorage.setItem('User', JSON.stringify(action.info))
             return {
                 ...state,
                 id: action.info._id,
                 username: action.info.username,
-                image: action.info.image
+                image: action.info.image,
+                games: action.info.games
             }
+        case 'SELECT_GAME':
+            console.log(action.info.game)
         default: 
             return state;
     }
@@ -39,6 +45,16 @@ export default function ProvideUser({children}) {
 
 export const useProvideUser = () =>{
     const {state, dispatch} = useUser();
+    useEffect(() => {
+        const savedUser = JSON.parse(localStorage.getItem('User')) || false
+        console.log(savedUser)
+        if (savedUser) {
+          dispatch({
+            type: 'CHANGE_USER',
+            info: savedUser,
+          })
+        }
+      }, [dispatch])
 
     //create functions that call to the backend with axios for frontend use
     return{

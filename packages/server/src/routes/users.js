@@ -1,5 +1,5 @@
 import express from 'express'
-import { User } from '../models'
+import { Game, User } from '../models'
 import chalk from 'chalk'
 import bcrypt from 'bcryptjs'
 const { check, validationResult } = require('express-validator/check')
@@ -8,6 +8,7 @@ const config = require('../config/keys')
 const configJWT = config.jwt.secret
 const configExp = config.jwt.tokenLife
 const router = express.Router();
+
 // router.
 router.post('/login', async (req, res) => {
     const { username, password } = req.body
@@ -15,29 +16,63 @@ router.post('/login', async (req, res) => {
         const userFound = await User.findOne({ username })
         const passCompare = await bcrypt.compare(password, userFound.password)
         console.log(config.jwt.secret)
-        if(passCompare && userFound){
+        if (passCompare && userFound) {
             res.send(
                 {
-               valid: passCompare, 
-               user: userFound
-            })
-        } else{
+                    valid: passCompare,
+                    user: userFound
+                })
+        } else {
             res.send({
                 valid: false
             })
         }
-    }catch(err){
+    } catch (err) {
         res.send(err)
     }
 })
+router.put('/add-game', async (req, res) => {
+    const { game, id } = req.body
+    let version = 0;
+    console.log(game)
+    try {
+        let exists = await Game.exists({
+            title: game
+        })
+
+        console.log(exists)
+
+        const newGame = new Game({
+            title: game,
+            owner: id,
+            version
+        })
+        const userFound = await User.findByIdAndUpdate(
+            {
+                _id: id
+            },
+            {
+                $push: { games: newGame }
+            },
+            {
+                new: true
+            }
+        )
+        // const user = await User.findOne({ username })
+        const savedGame = await newGame.save()
+        res.json({ userFound })
+
+    } catch (err) {
+        res.send(err)
+    }
+
+})
 router.post('/', async (req, res) => {
     const { username, password, email } = req.body
-    console.log(chalk.blue('round 1'))
     const superPassword = await bcrypt.hash(password, 12)
     try {
         const userExists = await User.findOne({ username })
         const emailExists = await User.findOne({ email })
-        console.log(chalk.blue('round 2'))
 
 
         if (!userExists && !emailExists) {
@@ -47,7 +82,6 @@ router.post('/', async (req, res) => {
                 email,
             })
             const savedUser = await user.save()
-            console.log(chalk.blue('round 3'))
             const payload = {
                 user: {
                     id: user.id
@@ -60,15 +94,14 @@ router.post('/', async (req, res) => {
                 {
                     expiresIn: configExp
                 },
-                (err, token)=>{
-                    if(err){
+                (err, token) => {
+                    if (err) {
                         throw err;
-                    }else{
-                        res.json({token})
+                    } else {
+                        res.json({ token })
                     }
                 }
-                )
-                console.log(chalk.blue('round 4'))
+            )
         } else {
             res.status(409).json(409)
         }

@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
@@ -16,7 +15,7 @@ export default function HomePage(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(0);
-  const { state,dispatch, userReducer} = useProvideUser()
+  const { state,dispatch, userReducer,} = useProvideUser()
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
@@ -28,9 +27,14 @@ export default function HomePage(props) {
       })
       .then(function (res) {
         if (res.data.valid === true) {
-          userReducer(state,{type: "CHANGE_USER", info: res.data.user})
-          setLoginStatus(2);
 
+          dispatch({
+            type: 'CHANGE_USER',
+            info: res.data.user,
+          })
+          window.location.replace("/games")
+          console.log(state)
+          setLoginStatus(2);
         } else {
           setLoginStatus(1);
         }
@@ -47,7 +51,6 @@ export default function HomePage(props) {
     
      console.log(state)
   }
-
   return (
     <main>
       <h1>
@@ -76,7 +79,6 @@ export default function HomePage(props) {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </Form.Group>
-
             <Button
               block
               size="lg"

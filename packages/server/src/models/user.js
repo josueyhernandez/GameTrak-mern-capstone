@@ -1,4 +1,5 @@
 import mongoose from 'mongoose'
+import { Game } from '.'
 const { ObjectId } = mongoose.Schema.Types
 
 const UserSchema = new mongoose.Schema({
@@ -17,7 +18,13 @@ const UserSchema = new mongoose.Schema({
   image: {
     type: String,
     default: "./profile.jpg"
-  }
+  },
+  games: [
+    {
+      type: ObjectId,
+      ref: "Game"
+    }
+  ],
   
 })
 

@@ -9,6 +9,7 @@ import ItemPage from 'pages/ItemPage/item'
 import AttributePage from 'pages/AttributePage/attribute'
 import PlacesPage from 'pages/PlacesPage/places'
 import SkillsPage from 'pages/SkillsPage/skills'
+import CreatePage from 'pages/CreateCharacter/create'
 import './index.css'
 import ProvideUser from "./hooks/globalStates"
 ReactDOM.render(
@@ -24,6 +25,7 @@ ReactDOM.render(
           <Route exact path="/attributes" component={AttributePage} />
           <Route exact path="/places" component={PlacesPage} />
           <Route exact path="/skills" component={SkillsPage} />
+          <Route exact path="/create" component={CreatePage} />
         </Switch>
       </BrowserRouter>
     </ProvideUser>

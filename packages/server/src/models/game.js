@@ -8,9 +8,14 @@ const GameSchema = new mongoose.Schema({
   },
   image: {
     type: String,
+    default: "./profile.jpg"
+  },
+  version:{
+    type: Number
   },
   owner: {
-    type: String,
+    type: ObjectId,
+    ref: 'User',
   },
   
 })

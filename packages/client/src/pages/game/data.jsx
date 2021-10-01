@@ -43,12 +43,6 @@ const gameData = {
 			imageUrl:
 				'https://media.gamestop.com/i/gamestop/11151961/NBA-2K22---PlayStation-4?$pdp2x$$&fmt=webp',
 		},
-		{
-			id: 7,
-			name: 'DRAGONBALL Z KAKAROT',
-			imageUrl:
-				'https://media.gamestop.com/i/gamestop/10172926/DRAGON-BALL-Z-KAKAROT---Xbox-One?$pdp2x$$&fmt=webp',
-		},
 	],
 };
 export default gameData
