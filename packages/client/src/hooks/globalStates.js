@@ -21,7 +21,11 @@ const userReducer = (state, action) =>{
                 games: action.info.games
             }
         case 'SELECT_GAME':
-            console.log(action.info.game)
+            localStorage.setItem('CurrentGame', JSON.stringify(action.info))
+            return{
+                ...state,
+                currentGame: action.info
+            }
         default: 
             return state;
     }
@@ -47,6 +51,7 @@ export const useProvideUser = () =>{
     const {state, dispatch} = useUser();
     useEffect(() => {
         const savedUser = JSON.parse(localStorage.getItem('User')) || false
+        const savedCurrentGame = JSON.parse(localStorage.getItem('CurrentGame')) || false
         console.log(savedUser)
         if (savedUser) {
           dispatch({
@@ -54,6 +59,12 @@ export const useProvideUser = () =>{
             info: savedUser,
           })
         }
+        if (savedCurrentGame) {
+            dispatch({
+              type: 'SELECT_GAME',
+              info: savedCurrentGame,
+            })
+          }
       }, [dispatch])
 
     //create functions that call to the backend with axios for frontend use

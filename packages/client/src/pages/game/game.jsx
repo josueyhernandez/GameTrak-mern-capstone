@@ -91,19 +91,24 @@ export default function GamesPage(props) {
 		console.log("List Of Games ", listOfGames)
 	}
 	function showMe() {
-		console.log(game)
+		dispatch({
+			type: 'SELECT_GAME',
+			info: "TEST",
+		})
+		console.log(state)
 	}
 	function changeName(e) {
 		setGame(e.target.value)
-		console.log(game)
 	}
+
 
 	useEffect(listGames, [state])
 
 	return (
 		<main>
-			<h3 className='game-page'>Welcome, {state.username}! The last game you worked on is Animal Crossing!</h3>
-			{/* <Button onClick={test}>POWER</Button> */}
+			<h3 className='game-page'>Welcome, {state.username}!</h3>
+			<h4>You were previously working on the game, {state.currentGame && state.currentGame}</h4>
+			<Button onClick={showMe}>POWER</Button>
 			<span className='game-maker'>
 				<Button onClick={createGame}>New Game</Button>
 				<Form.Group>
