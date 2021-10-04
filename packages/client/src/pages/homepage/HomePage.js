@@ -106,5 +106,4 @@ export default function HomePage(props) {
       )}
     </main>
   );
-
 }

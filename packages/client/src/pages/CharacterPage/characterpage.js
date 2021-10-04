@@ -2,8 +2,13 @@
 import React from "react";
 import "./characterpage.css"
 import scorpion from "./images/scorpion.jpg"
+import { useProvideUser, } from 'hooks/globalStates';
 
 export default function CharacterPage() {
+    const { state, dispatch } = useProvideUser();
+    function testButton () {
+        console.log(state)
+    }
     function selectCharacter() {
         // let select = document.getElementById("characters")
         // // let characterValue = select.options[select.selectedIndex].value
@@ -13,11 +18,12 @@ export default function CharacterPage() {
 
     return (
         <main>
-            <div class="log">
+            <button onClick = {testButton}>Test Button</button>
+            <div className="log">
                 <button class="logout" onClick={() => window.location.replace("/")}>Logout</button>
-                <button class="back">Back to List</button>
+                <button class="back" onClick={() => window.location.replace("/games")}>Back to List</button>
             </div>
-            <div class="header">
+            <div className="header">
                 <h3><a href="/character">Character</a></h3>
                 <h3><a href="/item">Items</a></h3>
                 <h3><a href="/places">Places</a></h3>
@@ -38,7 +44,7 @@ export default function CharacterPage() {
                 <h2><a href="/create" class="create">Create New</a></h2>
 
                 <div>
-                    <h1 class="game-title">Mortal Kombat</h1>
+                    {state.currentGame && <h1 class="game-title">{state.currentGame.name} Characters</h1>}
                 </div>
                 <div class="characterId">
                     <h2 class="characterName">None</h2>
