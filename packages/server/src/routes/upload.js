@@ -1,19 +1,18 @@
-import multer from "multer";
+import express, { response } from 'express'
+import bcrypt from 'bcryptjs'
+import { User } from '../models'
+import { requireAuth, upload } from '../middleware'
+const router = express.Router()
 
-const storage = multer.diskStorage({
-    destination: './public/',
-    filename: (req, file, cb) =>{
-        const filename = file.originalname.toLowerCase().split(" ").join("-")
-        cb(null, "IMAGE-" + Date.now() + filename)
+router
+  .route('/').post(upload.single("image"),(req, res) => {
+    try{
+        console.log(req.file)
+        res.status(200).send(req.file.filename)
+    }catch(err){
+        res.status(404).send("It's not working")
     }
+
 })
 
-const upload = multer({
-    storage: storage,
-    fileFilter: (req, file, cb) => {
-        cb(null, true)
-    },
-    limits: {filesize: 1000000}
-})
-
-module.exports = upload
+  module.exports = router
