@@ -122,3 +122,6 @@ body {
   display: flex;
   justify-content: space-around;
 }
+.header-item:hover{
+  border-bottom: double white 3px;
+}

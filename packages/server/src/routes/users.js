@@ -31,10 +31,21 @@ router.post('/login', async (req, res) => {
         res.send(err)
     }
 })
+router.post('/refresh', async (req, res) => {
+    const { username} = req.body
+    try {
+        const userFound = await User.findOne({ username })
+        // console.log(config.jwt.secret)
+        console.log(userFound)
+        res.send(userFound)
+    } catch (err) {
+        res.send(err)
+    }
+})
 router.put('/add-game', async (req, res) => {
-    const { game, id } = req.body
+    const { game, id, image } = req.body
     let version = 0;
-    console.log(game)
+    console.log(image)
     try {
         let exists = await Game.exists({
             title: game
@@ -45,7 +56,8 @@ router.put('/add-game', async (req, res) => {
         const newGame = new Game({
             title: game,
             owner: id,
-            version
+            version,
+            image
         })
         const userFound = await User.findByIdAndUpdate(
             {
