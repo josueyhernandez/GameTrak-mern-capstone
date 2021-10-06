@@ -5,6 +5,7 @@ import scorpion from "./images/scorpion.jpg"
 import { useProvideUser, } from 'hooks/globalStates'
 import axios from "axios"
 import { Button } from "react-bootstrap";
+import { useProvideStyle } from 'hooks/useStyle';
 
 const initialChar = {
     name: "SELECT A CHARACTER",
@@ -18,6 +19,10 @@ export default function CharacterPage() {
     const [currentChar, setCurrentChar] = useState(initialChar)
     const [charList, setCharList] = useState([])
     const { state, dispatch } = useProvideUser()
+    const colorScheme = useProvideStyle();
+
+    document.body.setAttribute("id", colorScheme.getStyle())
+
     function testButton() {
         console.log(state)
     }
@@ -50,6 +55,13 @@ export default function CharacterPage() {
         }
     }
     useEffect(selectCharacter, [state])
+
+    function setColor(color){
+        console.log(color.target.value)
+        colorScheme.setNewStyle(color.target.value)
+        document.body.id = colorScheme.getStyle()
+    }
+
     return (
         <main>
             {/* <button onClick={testButton}>Test Button</button> */}
@@ -107,6 +119,11 @@ export default function CharacterPage() {
                 {currentChar.id !== null && <img height="400px" src={currentChar.image} alt="Choose a character" />}
 
             </div>
+            <select name="color" onChange={setColor}>
+                <option value="green">Green and Purple</option>
+                <option value="red">Red and Blue</option>
+                <option value="blue">Blue and Yellow</option>
+            </select>
         </main>
 
     )

@@ -3,6 +3,7 @@ import { Button, Form, Modal } from 'react-bootstrap';
 import GameData from './data';
 import { useProvideUser, } from 'hooks/globalStates';
 import { useState, useEffect } from 'react';
+import { useProvideStyle } from 'hooks/useStyle';
 const axios = require('axios');
 
 
@@ -12,6 +13,9 @@ export default function GamesPage(props) {
 	const [newImage, setNewImage] = useState()
 	const { state, dispatch } = useProvideUser();
 	const [list, setList] = useState([]);
+	const colorScheme = useProvideStyle();
+
+  	document.body.setAttribute("id", colorScheme.getStyle())
 	async function test() {
 		console.log(GameData.type)
 		console.log(state)
@@ -124,6 +128,12 @@ export default function GamesPage(props) {
 		return user
 	}
 
+	function setColor(color){
+		console.log(color.target.value)
+		colorScheme.setNewStyle(color.target.value)
+		document.body.id = colorScheme.getStyle()
+	  }
+
 
 	useEffect(listGames, [state])
 
@@ -233,6 +243,11 @@ export default function GamesPage(props) {
 
 
 			</div>
+			<select name="color" onChange={setColor}>
+            	<option value="green">Green and Purple</option>
+            	<option value="red">Red and Blue</option>
+            	<option value="blue">Blue and Yellow</option>
+          </select>
 		</main>
 
 	)

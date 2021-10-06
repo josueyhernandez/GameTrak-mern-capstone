@@ -2,6 +2,7 @@ import React, { useState } from "react"
 import "./create.css"
 import { useProvideUser } from "hooks/globalStates"
 import axios from "axios"
+import { useProvideStyle } from 'hooks/useStyle';
 
 const initialState = {
     name: null,
@@ -12,6 +13,10 @@ export default function CreatePage() {
     const { state, dispatch } = useProvideUser()
     const [input, setInput] = useState()
     const [image, setImage] = useState()
+    const colorScheme = useProvideStyle();
+
+    document.body.setAttribute("id", colorScheme.getStyle())
+
     function changeInput(e) {
         let target = e.target.name;
         setInput({
@@ -33,6 +38,12 @@ export default function CreatePage() {
       function test(){
           console.log(input)
       }
+
+    function setColor(color){
+        console.log(color.target.value)
+        colorScheme.setNewStyle(color.target.value)
+        document.body.id = colorScheme.getStyle()
+    }
 
     return (
         <main>
@@ -81,6 +92,11 @@ export default function CreatePage() {
                     <button class="characterPage" onClick={() => window.location.replace("/character")}>Character Page</button>
                 </div>
             </div>
+            <select name="color" onChange={setColor}>
+                <option value="green">Green and Purple</option>
+                <option value="red">Red and Blue</option>
+                <option value="blue">Blue and Yellow</option>
+            </select>
         </main>
     )
 }
