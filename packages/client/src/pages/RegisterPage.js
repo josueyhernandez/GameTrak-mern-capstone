@@ -115,7 +115,7 @@ export default function RegisterPage() {
 
   return (
 
-    <div className="register" id={colorScheme.getStyle()}>
+    <div className="register">
       <Form onSubmit={handleSignup} className="register-form">
         <h2>Welcome! Register Here</h2>
         <Form.Group size="lg" controlId="username">
