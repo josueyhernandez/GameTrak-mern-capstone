@@ -1,5 +1,8 @@
 .form {
-    padding-right: 40%
+    /* padding-right: 40%; */
+    display: flex;
+    flex-direction: column;
+
 }
 
 .characterImg {
@@ -8,4 +11,9 @@
 
 .characterPage {
     margin-right: 40%
+}
+.attribute-input{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
 }

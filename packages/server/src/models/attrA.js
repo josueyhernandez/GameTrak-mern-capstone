@@ -8,10 +8,19 @@ const AttrASchema = new mongoose.Schema({
     default: "Unknown Attribute"
   },
   value:{
-      type: String
+      type: String,
+      default: ""
   },
-
+  game: {
+    type: ObjectId,
+    ref: 'Game',
+  },
+  owned:{
+    type: Boolean,
+    default: "false"
+  }
   
+ 
 })
 
 const AttrA = mongoose.model('AttrA', AttrASchema)
