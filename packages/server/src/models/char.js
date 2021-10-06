@@ -17,7 +17,15 @@ const CharSchema = new mongoose.Schema({
   },
   description:{
       type: String
-  }
+  },
+  attributes: [
+    {
+      type: ObjectId,
+      ref: ["AttrA", "AttrB"]
+    },
+
+  ],
+  
   
 })
 

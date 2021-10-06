@@ -9,6 +9,10 @@ const SkillSchema = new mongoose.Schema({
   description:{
       type: String
   },
+  game: {
+    type: ObjectId,
+    ref: 'Game',
+},
 
   
 })

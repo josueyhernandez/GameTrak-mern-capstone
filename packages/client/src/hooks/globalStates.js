@@ -11,7 +11,6 @@ const initialState = {
 const userReducer = (state, action) =>{
     switch(action.type){
         case 'CHANGE_USER':
-            console.log(action.info.username)
             localStorage.setItem('User', JSON.stringify(action.info))
             return {
                 ...state,
@@ -26,6 +25,8 @@ const userReducer = (state, action) =>{
                 ...state,
                 currentGame: action.info
             }
+        case 'LOGOUT':
+
         default: 
             return state;
     }

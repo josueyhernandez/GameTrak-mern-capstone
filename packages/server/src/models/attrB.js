@@ -8,9 +8,13 @@ const AttrBSchema = new mongoose.Schema({
     default: "Unknown Attribute"
   },
   value:{
-      type: Number
+      type: Number,
+      default: 0
   },
-
+  game: {
+    type: ObjectId,
+    ref: 'Game',
+},
   
 })
 

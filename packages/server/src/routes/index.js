@@ -5,6 +5,7 @@ import gameRouter from './games'
 import authRouter from './auth'
 import charsRouter from './chars'
 import uploadRouter from './upload'
+import attrRouter from './attr'
 
 const router = express.Router()
 
@@ -30,4 +31,5 @@ router.use('/games', gameRouter)
 router.use('/auth', authRouter)
 router.use('/chars', charsRouter)
 router.use('/upload', uploadRouter)
+router.use('/attr', attrRouter)
 module.exports = router
