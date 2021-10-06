@@ -15,6 +15,11 @@ const AttrASchema = new mongoose.Schema({
     type: ObjectId,
     ref: 'Game',
   },
+  owned:{
+    type: Boolean,
+    default: "false"
+  }
+  
  
 })
 

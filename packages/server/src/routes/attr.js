@@ -94,12 +94,14 @@ router.get('/attrb/:id', async (req, res) => {
     }
 })
 router.post('/', async (req, res) => {
-    const { name, value, game, type } = req.body
+    const { name, value, game, type, owned } = req.body
     try {
         if (type === "Words") {
             let attrA = new AttrA({
                 name,
-                game
+                game,
+                owned,
+                value
             })
             let savedAttr = await attrA.save()
             res.send(attrA)
@@ -107,7 +109,9 @@ router.post('/', async (req, res) => {
         if (type === "Numbers") {
             let attrB = new AttrB({
                 name,
-                game
+                game,
+                owned,
+                value
             })
             let savedAttr = await attrB.save()
             res.send(savedAttr)

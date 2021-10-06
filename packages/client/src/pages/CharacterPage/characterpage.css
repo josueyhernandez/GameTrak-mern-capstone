@@ -25,7 +25,7 @@
     display: flex;
     text-align: center;
    
-    justify-content:center;
+    justify-content:space-around;
 }
 .character-info{
     align-items: center;
@@ -107,12 +107,16 @@ a {
     font-weight: bold;
   }
   .attribute{
-      width: 10vw;
+      width: 20vw;
       display: flex;
       justify-content: space-evenly;
-      align-items: center;
+      align-items: flex-start;
   }
   #edit-att{
       display: flex;
+      justify-content: flex-start;
       flex-direction: column;
+      border: 2px black solid;
+      align-items: center;
+      height: 100%;
   }

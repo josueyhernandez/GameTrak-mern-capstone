@@ -51,31 +51,42 @@ export default function AttributePage() {
             toast.error("Name Your New Attribute")
         } else {
             await axios
-                .post('/api/attr', {
-                    name: attrName,
-                    type: attrType,
-                    game: state.currentGame.id
-                })
-                .then(res => {
-                    attrId =res.data._id
-                })
+            .post('/api/attr', {
+                name: attrName,
+                type: attrType,
+                game: state.currentGame.id,
+                owned: false
+            })
             await axios
-            .get(`/api/chars/${state.currentGame.id}`)
-            .then(res =>{
-                charArray = res.data
-            })
-            charArray.forEach(async(character)=>{
-                await axios
-                .put('/api/attr/to-characters',{
-                    game: state.currentGame.id,
-                    character: character._id,
-                    attribute: attrId
+                .get(`/api/chars/${state.currentGame.id}`)
+                .then(async res => {
+                    charArray = res.data
+                    for (let i = 0; i < charArray.length; i++) {
+                        let character = charArray[i]
+                        await axios
+                            .post('/api/attr', {
+                                name: attrName,
+                                type: attrType,
+                                game: state.currentGame.id,
+                                owned: true
+                            })
+                            .then(async res => {
+                                attrId = res.data._id
+                                await axios
+                                    .put('/api/attr/to-characters', {
+                                        game: state.currentGame.id,
+                                        character: character._id,
+                                        attribute: attrId
+                                    })
+                                    .then(res => {
+                                        console.log(res.data)
+                                    })
+                            })
+
+                    }
+
                 })
-                .then(res =>{
-                    console.log(res.data)
-                })
-            })
-                window.location.reload();
+            window.location.reload();
         }
 
     }
@@ -99,7 +110,7 @@ export default function AttributePage() {
             </div>
 
             <div id="attribute-forms">
-            <h1 class="attribute">Attributes</h1>
+                <h1 class="attribute">Attributes</h1>
                 <Form.Group class="attribute-name">
                     <Form.Label>Attribute Name</Form.Label>
                     <Form.Control onChange={(e) => {
@@ -135,17 +146,21 @@ export default function AttributePage() {
                     <div>
                         <b>Letters Attributes</b>
                         {attrAList !== undefined && attrAList.map(attribute => {
+                            if(!attribute.owned){
                             return (
                                 <div key={attribute._id}>{attribute.name}</div>
                             )
+                            }
                         })}
                     </div>
                     <div>
                         <b>Numbers Attributes</b>
                         {attrBList !== undefined && attrBList.map(attribute => {
-                            return (
-                                <div key={attribute._id}>{attribute.name}</div>
-                            )
+                            if(!attribute.owned){
+                                return (
+                                    <div key={attribute._id}>{attribute.name}</div>
+                                )
+                                }
                         })}
                     </div>
                 </div>

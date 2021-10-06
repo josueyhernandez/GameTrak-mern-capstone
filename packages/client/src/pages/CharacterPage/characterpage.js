@@ -62,7 +62,7 @@ export default function CharacterPage() {
     async function obtainAttrInfo(attrs) {
         let attrArray = []
         if (attrs !== undefined) {
-            const attributes = attrs.map(async attributeId => {
+            attrs.map(async attributeId => {
                 await axios.get(`/api/attr/${attributeId}`)
                     .then((res) => {
                         console.log(res.data)
@@ -80,6 +80,7 @@ export default function CharacterPage() {
         setSelectedAttr(e)
     }
     async function changeAttr(e){
+        setCurrAttr([])
         setEditMode(false)
         await axios.put('/api/chars/change-attribute', {
             character: currentChar.id,
@@ -87,6 +88,10 @@ export default function CharacterPage() {
             newValue: editVal
         })
         .then(res=>console.log(res.data))
+        axios.get(`/api/chars/character/${currentChar.id}`)
+                .then((res) => {
+                    obtainAttrInfo(res.data.attributes)
+                })
     }
     useEffect(selectCharacter, [state])
     return (
@@ -154,7 +159,7 @@ export default function CharacterPage() {
                                 <h4> {attribute.info.value}</h4>
                                 <div onClick = {()=>{
                                     editAttr(attribute)
-                                }} className="edit-button-att">✎</div>
+                                }} id="edit-button-att">✎</div>
                             </div>
                         )
                     })}

@@ -1,7 +1,9 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import "./create.css"
 import { useProvideUser } from "hooks/globalStates"
 import axios from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const initialState = {
     name: null,
@@ -9,78 +11,227 @@ const initialState = {
     image: ""
 }
 export default function CreatePage() {
+    const [clickedSubmit, setClickedSubmit] = useState(false)
     const { state, dispatch } = useProvideUser()
     const [input, setInput] = useState()
     const [image, setImage] = useState()
+    const [attrAList, setAttrAList] = useState()
+    const [attrBList, setAttrBList] = useState()
+    const [attrAList2, setAttrAList2] = useState()
+    const [attrBList2, setAttrBList2] = useState()
+
     function changeInput(e) {
         let target = e.target.name;
         setInput({
             ...input,
             [target]: e.target.value
-
         })
-        console.log(input)
+        // console.log(input)
     }
+    async function findAttrA() {
+        if (state.currentGame) {
+            console.log(state.currentGame.id)
+            await axios
+                .get(`/api/attr/attra/${state.currentGame.id}`)
+                .then((res) => {
+                    let attributeList = res.data.filter(attribute => attribute.owned === false).map(filteredAtt => filteredAtt.name)
+                    let newAttrList = {
+
+                    }
+                    attributeList.forEach(name => {
+                        newAttrList = (
+                            {
+                                ...newAttrList,
+                                [name]: ""
+
+                            }
+                        )
+                    })
+                    console.log(newAttrList)
+                    setAttrAList2(newAttrList)
+                    setAttrAList(res.data.filter(attribute => attribute.owned === false))
+                })
+        }
+    }
+    useEffect(findAttrA, [state])
+    async function findAttrB() {
+        if (state.currentGame) {
+            console.log(state.currentGame.id)
+            await axios
+                .get(`/api/attr/attrB/${state.currentGame.id}`)
+                .then((res) => {
+                    let attributeList = res.data.filter(attribute => attribute.owned === false).map(filteredAtt => filteredAtt.name)
+                    let newAttrList = {
+
+                    }
+                    attributeList.forEach(name => {
+                        newAttrList = (
+                            {
+                                ...newAttrList,
+                                [name]: 0
+
+                            }
+                        )
+                    })
+                    console.log(res.data)
+                    setAttrBList2(newAttrList)
+                    setAttrBList(res.data.filter(attribute => attribute.owned === false))
+                })
+        }
+    }
+    useEffect(findAttrB, [state])
     const changeCharacterImage = async (event) => {
         const imageToUpload = event.target.files[0]
         console.log(imageToUpload)
         let formData = new FormData();
         formData.append('image', imageToUpload);
-        const uploadedImage = await axios.post('/api/upload',formData)
+        const uploadedImage = await axios.post('/api/upload', formData)
         console.log(uploadedImage.data);
         setImage(uploadedImage.data)
-      }
-      function test(){
-          console.log(input)
-      }
+    }
+    function test() {
+        console.log(attrAList2)
+        console.log(attrBList2)
+        for (let key in attrAList2) {
+            console.log(`${key}: ${attrAList2[key]}`);
+        }
+    }
 
     return (
         <main>
-            <button onClick = {test}>Test</button>
+            {/* <button onClick={test}>Test</button> */}
             <div id="character-creation-screen">
                 <h2 class="new">Create Your Own Character</h2>
-                
+
                 <div class="characterInput">
                     <form class="form" onChange={changeInput}>
-                        <label for="name">Name: </label>
-                        <input type="text" name="name" class="charName" required></input><br></br>
-                        <label for="gender">Gender: </label>
-                        <input type="text" class="charGender"></input><br></br>
-                        <label for="attributes">Attributes: </label>
-                        <input type="number" class="charAttributes"></input><br></br>
-                        <label for="strength">Strength: </label>
-                        <input type="number" class="strength"></input><br></br>
-                        <label for="Agility">Agility: </label>
-                        <input type="number" class="agility"></input><br></br>
-                        <label for="endurance">Endurance: </label>
-                        <input type="number" class="endurance"></input><br></br>
-                        <label for="Skills">Skills: </label>
-                        <input type="text" class="skills"></input><br></br>
-                        <label for="description">Description: </label>
-                        <textarea type="textarea" name="description"></textarea><br></br>
+                        <div className="attribute-input">
+                            <label for="name">Name: </label>
+                            <input type="text" name="name" class="charName" required></input>
+                        </div>
+                        {attrAList !== undefined && attrAList.map(attribute => {
+
+                            return (
+                                <div className="attribute-input">
+                                    <label for={attribute.name}>{attribute.name}: </label>
+                                    <input onChange={(e) => {
+                                        //    let targetAtt = attrAList.find(att=>att._id = attribute._id);
+                                        console.log(e)
+                                        setAttrAList2({
+                                            ...attrAList2,
+                                            [attribute.name]: e.target.value
+                                        })
+
+                                    }} type="text" name={attribute.name}></input>
+                                </div>
+                            )
+
+                        })}
+                        {attrBList !== undefined && attrBList.map(attribute => {
+
+                            return (
+                                <div className="attribute-input">
+                                    <label for={attribute.name}>{attribute.name}: </label>
+                                    <input type="number" name={attribute.name} onChange={(e) => {
+                                        console.log(e)
+                                        setAttrBList2({
+                                            ...attrBList2,
+                                            [attribute.name]: e.target.value
+                                        })
+
+                                    }}></input>
+                                </div>
+                            )
+
+                        })}
+                        <div className="attribute-input">
+                            <label for="description">Description: </label>
+                            <textarea type="textarea" name="description"></textarea><br></br>
+                        </div>
                         <label for="upload">Upload an image for your character here!</label>
                         <input type="file" onChange={changeCharacterImage} /><br />
-                        <input type="submit" id="submit" value="Submit" onClick={
+                        {!clickedSubmit &&<input type="submit" id="submit" value="Submit" onClick={
                             async (e) => {
+                                toast.success("Your new character is being created!")
+                                setClickedSubmit(true)
+                                let newCharId
                                 e.preventDefault()
                                 console.log(image)
                                 await axios.post
                                     ("/api/chars/", {
-                                        name: input.name,
-                                        description: input.description,
+                                        name: input?.name,
+                                        description: input?.description,
                                         game: state.currentGame.id,
                                         image
                                     }).then((res) => {
                                         console.log(res.data)
+                                        newCharId = res.data._id
+                                        console.log(newCharId)
                                     })
+                                for (let key in attrAList2) {
+                                    await axios
+                                        .post('/api/attr', {
+                                            name: key,
+                                            type: "Words",
+                                            game: state.currentGame.id,
+                                            owned: true,
+                                            value: attrAList2[key]
+                                        })
+                                        .then(async res => {
+                                           let attrId = res.data._id
+                                            await axios
+                                                .put('/api/attr/to-characters', {
+                                                    game: state.currentGame.id,
+                                                    character: newCharId,
+                                                    attribute: attrId
+                                                })
+                                                .then(res => {
+                                                    console.log(res.data)
+                                                })
+                                        })
+                                }
+                                for (let key in attrBList2) {
+                                    await axios
+                                        .post('/api/attr', {
+                                            name: key,
+                                            type: "Numbers",
+                                            game: state.currentGame.id,
+                                            owned: true,
+                                            value: attrBList2[key]
+                                        })
+                                        .then(async res => {
+                                           let attrId = res.data._id
+                                            await axios
+                                                .put('/api/attr/to-characters', {
+                                                    game: state.currentGame.id,
+                                                    character: newCharId,
+                                                    attribute: attrId
+                                                })
+                                                .then(res => {
+                                                    console.log(res.data)
+                                                })
+                                        })
+                                }
+                                window.location.replace("/character")
                             }
-                        }></input>
+                        }/>}
                     </form>
                 </div>
                 <div>
-                    <button class="characterPage" onClick={() => window.location.replace("/character")}>Character Page</button>
+                    {!clickedSubmit && <button class="characterPage" onClick={() => window.location.replace("/character")}>Character Page</button>}
                 </div>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
         </main>
     )
 }
