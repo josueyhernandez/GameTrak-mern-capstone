@@ -115,7 +115,7 @@ export default function RegisterPage() {
 
   return (
 
-    <div className="register" id={colorScheme.getStyle()}>
+    <div className="register">
       <Form onSubmit={handleSignup} className="register-form">
         <h2>Welcome! Register Here</h2>
         <Form.Group size="lg" controlId="username">
@@ -160,9 +160,9 @@ export default function RegisterPage() {
         
       </Form>
       <select name="color" onChange={setColor}>
-        <option value="green">Green</option>
-        <option value="red">Red</option>
-        <option value="blue">Blue</option>
+        <option value="green">Green and Purple</option>
+        <option value="red">Red and Blue</option>
+        <option value="blue">Blue and Yellow</option>
       </select>
       <ToastContainer
         position="top-right"

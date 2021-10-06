@@ -8,6 +8,7 @@ import { FaExclamationCircle } from 'react-icons/fa'
 import "./HomePage.css" 
 import { useProvideUser } from 'hooks/globalStates'
 import image from "./profile.jpg";
+import { useProvideStyle } from 'hooks/useStyle';
 const axios = require('axios');
 
 export default function HomePage(props) {
@@ -16,6 +17,10 @@ export default function HomePage(props) {
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(0);
   const { state,dispatch, userReducer,} = useProvideUser()
+  const colorScheme = useProvideStyle();
+
+  document.body.setAttribute("id", colorScheme.getStyle())
+
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
@@ -50,6 +55,12 @@ export default function HomePage(props) {
   async function testButton(){
     
      console.log(state)
+  }
+
+  function setColor(color){
+    console.log(color.target.value)
+    colorScheme.setNewStyle(color.target.value)
+    document.body.id = colorScheme.getStyle()
   }
   return (
     <main>
@@ -102,6 +113,11 @@ export default function HomePage(props) {
             {loginStatus === 1 && <div>LOGIN FAILED</div>}
             <Button onClick = {testButton}>t</Button>
           </Form>
+          <select name="color" onChange={setColor}>
+            <option value="green">Green and Purple</option>
+            <option value="red">Red and Blue</option>
+            <option value="blue">Blue and Yellow</option>
+          </select>
         </div>
       )}
     </main>

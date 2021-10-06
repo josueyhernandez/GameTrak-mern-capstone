@@ -56,12 +56,24 @@ body {
   background-color: rgb(144, 174, 163);
 }
 
+#green h1 {
+  color: #4B0092
+}
+
 #red {
-  background-color: pink;
+  background-color: rgb(252, 191, 201);
+}
+
+#red h1 {
+  color: #005AB5
 }
 
 #blue {
-  background-color: aqua;
+  background-color: #0c7bdc;
+}
+
+#blue h1 {
+  color: #FFC20A
 }
 
 .register {
@@ -89,7 +101,7 @@ body {
 .game:hover{
   border: white solid 5px;
 }
-.game-list{
+#green .game-list{
   background-color: rgb(126, 151, 126);
   display: flex;
   justify-content:left;
@@ -97,6 +109,26 @@ body {
   border-top: white 5px solid;
   border-bottom: white 5px solid;
 }
+
+#red .game-list{
+  background-color: rgb(236, 150, 165);
+  display: flex;
+  justify-content:left;
+  flex-wrap: wrap;
+  border-top: white 5px solid;
+  border-bottom: white 5px solid;
+}
+
+#blue .game-list{
+  background-color: #075da8;
+  display: flex;
+  justify-content:left;
+  flex-wrap: wrap;
+  border-top: white 5px solid;
+  border-bottom: white 5px solid;
+}
+
+
 .game-maker{
   display: flex;
   justify-content: center;

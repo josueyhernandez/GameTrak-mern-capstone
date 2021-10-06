@@ -4,6 +4,7 @@ import { useProvideUser } from "hooks/globalStates"
 import axios from "axios"
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { useProvideStyle } from 'hooks/useStyle';
 
 const initialState = {
     name: null,
@@ -19,6 +20,9 @@ export default function CreatePage() {
     const [attrBList, setAttrBList] = useState()
     const [attrAList2, setAttrAList2] = useState()
     const [attrBList2, setAttrBList2] = useState()
+    const colorScheme = useProvideStyle();
+
+    document.body.setAttribute("id", colorScheme.getStyle())
 
     function changeInput(e) {
         let target = e.target.name;
@@ -95,6 +99,12 @@ export default function CreatePage() {
         for (let key in attrAList2) {
             console.log(`${key}: ${attrAList2[key]}`);
         }
+    }
+
+    function setColor(color){
+        console.log(color.target.value)
+        colorScheme.setNewStyle(color.target.value)
+        document.body.id = colorScheme.getStyle()
     }
 
     return (
@@ -232,6 +242,11 @@ export default function CreatePage() {
                 draggable
                 pauseOnHover
             />
+            <select name="color" onChange={setColor}>
+                <option value="green">Green and Purple</option>
+                <option value="red">Red and Blue</option>
+                <option value="blue">Blue and Yellow</option>
+            </select>
         </main>
     )
 }
