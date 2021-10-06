@@ -126,5 +126,36 @@ export default function CharacterPage() {
             </select>
         </main>
 
-    )
+      <div>
+        <h1 class="game-title">Mortal Kombat</h1>
+      </div>
+      <div class="characterId">
+        <h2 class="characterName">None</h2>
+        <p>
+          Name: <span class="name"></span>
+        </p>
+        <p>
+          Gender: <span class="gender"></span>
+        </p>
+        <p>
+          Attributes: <span class="attributes"></span>
+        </p>
+        <p>Strength: </p>
+        <p>Agility: </p>
+        <p>Endurance: </p>
+        <p>Skills: </p>
+        <div class="description">
+          <p>Description</p>
+        </div>
+        <img
+          src="./images/scorpion.jpg"
+          alt="Scorpion"
+          onError={(e) => {
+            e.target.onError = null;
+            e.target.src = { charImg };
+          }}
+        />
+      </div>
+    </main>
+  );
 }
