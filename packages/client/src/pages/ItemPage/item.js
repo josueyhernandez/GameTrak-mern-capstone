@@ -14,6 +14,29 @@ export default function ItemsPage() {
     const [itemDes, setItemDes] = useState()
     const [items, setItems] = useState()
     const colorScheme = useProvideStyle();
+    const [validated, setValidated] = useState(false);
+
+    async function validateToken() {
+
+        if (state) {
+            await axios
+                .post('/api/auth', {
+                    token: state.token
+                })
+                .then((res) => {
+                    setValidated(res.data._id === state.id)
+                    console.log(res.data)
+                })
+                .catch((err) => {
+                    setValidated(false)
+                })
+        }
+        else {
+            console.log(state)
+            setValidated(false)
+        }
+    }
+    useEffect(validateToken, [state])
 
     document.body.setAttribute("id", colorScheme.getStyle())
 
@@ -48,8 +71,14 @@ export default function ItemsPage() {
 
     return (
         <main>
+             {validated ? <div className="main">
             <div className="log">
-                <Button className="logout" onClick={() => window.location.replace("/")}>Logout</Button>
+                <Button className="logout" onClick={() =>{
+                     dispatch({
+                        type: 'LOGOUT',
+                        info: "TEST",
+                    })
+                     window.location.replace("/")}}>Logout</Button>
                 <Button className="back" onClick={() => window.location.replace("/games")}>Back to List</Button>
                 <div id="current-game">
                     {state.currentGame && <div id="game-title">{state.currentGame.name}</div>}
@@ -112,6 +141,18 @@ export default function ItemsPage() {
                 <option value="red">Red and Blue</option>
                 <option value="blue">Blue and Purple</option>
             </select>
+            </div>:
+            <div className="main">
+            {/* <h3>You are not authorized to use this page yet </h3>
+            <button onClick={() => {
+                dispatch({
+                    type: 'LOGOUT',
+                    info: "TEST",
+                })
+                window.location.replace("/")
+            }}>Go Back To Login</button> */}
+        </div>
+    }
         </main>
     )
 }
