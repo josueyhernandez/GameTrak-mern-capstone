@@ -110,8 +110,8 @@ export default function CharacterPage() {
         <main>
             {/* <button onClick={getatt}>Test Button</button> */}
             <div className="log">
-                <Button class="logout" onClick={() => window.location.replace("/")}>Logout</Button>
-                <Button class="back" onClick={() => window.location.replace("/games")}>Back to List</Button>
+                <Button className="logout" onClick={() => window.location.replace("/")}>Logout</Button>
+                <Button className="back" onClick={() => window.location.replace("/games")}>Back to List</Button>
                 <div id="current-game">
                     {state.currentGame && <div id="game-title">{state.currentGame.name}</div>}
                     {state.currentGame && <img height="50px" src={state.currentGame.image} />}
