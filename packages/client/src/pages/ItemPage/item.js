@@ -49,8 +49,8 @@ export default function ItemsPage() {
     return (
         <main>
             <div className="log">
-                <Button className="logout" onClick={() => window.location.reitem("/")}>Logout</Button>
-                <Button className="back" onClick={() => window.location.reitem("/games")}>Back to List</Button>
+                <Button className="logout" onClick={() => window.location.replace("/")}>Logout</Button>
+                <Button className="back" onClick={() => window.location.replace("/games")}>Back to List</Button>
                 <div id="current-game">
                     {state.currentGame && <div id="game-title">{state.currentGame.name}</div>}
                     {state.currentGame && <img height="50px" src={state.currentGame.image} />}
