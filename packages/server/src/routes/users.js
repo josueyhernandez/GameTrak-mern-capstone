@@ -17,11 +17,35 @@ router.post('/login', async (req, res) => {
         const passCompare = await bcrypt.compare(password, userFound.password)
         console.log(config.jwt.secret)
         if (passCompare && userFound) {
-            res.send(
+            const payload = {
+                user: {
+                    id: userFound.id
+                }
+            }
+            let futureToken;
+             jwt.sign(
+                payload,
+                configJWT,
                 {
-                    valid: passCompare,
-                    user: userFound
+                    expiresIn: configExp
+                },
+                (err, token) => {
+                    if (err) {
+                        
+                        throw err;
+                    } else {
+                        futureToken = token
+                        console.log(futureToken)
+                        res.send(
+                            {
+                                valid: passCompare,
+                                user: userFound,
+                                token,
+                            })
+                    }
                 })
+                    console.log(futureToken)
+
         } else {
             res.send({
                 valid: false

@@ -14,8 +14,26 @@ export default function GamesPage(props) {
 	const { state, dispatch } = useProvideUser();
 	const [list, setList] = useState([]);
 	const colorScheme = useProvideStyle();
+	const [validated, setValidated] = useState(true);
+	const [validateNum, setValidateNum] = useState(0)
 
 	document.body.setAttribute("id", colorScheme.getStyle())
+	async function validateToken() {
+		if (state) {
+			await axios
+				.post('/api/auth', {
+					token: state.token
+				})
+				.then((res) => {
+					setValidated(res.data._id === state.id)
+					console.log(res.data)
+				})
+				.catch((err) => {
+					setValidated(false)
+				})
+		}
+	}
+	useEffect(validateToken, [state])
 	async function test() {
 		console.log(GameData.type)
 		console.log(state)
@@ -73,6 +91,7 @@ export default function GamesPage(props) {
 					dispatch({
 						type: 'CHANGE_USER',
 						info: res.data.userFound,
+						token: state.token
 					})
 					// dispatch here res.data stuff
 				})
@@ -140,10 +159,17 @@ export default function GamesPage(props) {
 
 	return (
 		<main>
-			<h3 className='game-page'>Welcome, {state.username}!</h3>
-			{state.currentGame && <h4>You were previously working on the game, {state.currentGame.name} </h4>}
-			{/* <Button onClick={findUser}>POWER</Button> */}
-			<span className='game-maker'>
+			{validated ? <h3 className='game-page'>Welcome, {state.username}!</h3> :
+				<div className="main">
+					{/* <h3>You are not authorized to use this page yet </h3>
+					<button onClick={() => {
+						window.location.replace("/")
+					}}>Go Back To Login</button> */}
+				</div>
+			}
+			{state.currentGame && validated && <h4>You were previously working on the game, {state.currentGame.name} </h4>}
+			{validated && <Button onClick={validateToken}>TEST</Button>}
+			{validated && <span className='game-maker'>
 				<div className="buttons">
 					<Button onClick={createGame}>New Game</Button>
 					<Button onClick={() => {
@@ -174,9 +200,9 @@ export default function GamesPage(props) {
 					>
 					</Form.Control>
 				</Form.Group>
-			</span>
+			</span>}
 			{/* <Button onClick={showMe}>name of your stuff</Button> */}
-			<div className="game-list">
+			{validated && <div className="game-list">
 				{
 					list.map(game => {
 						return (
@@ -245,14 +271,14 @@ export default function GamesPage(props) {
 						)
 					})
 				}
-
-
 			</div>
-			<select name="color" onChange={setColor}>
-				<option value="green">Green and Purple</option>
-				<option value="red">Red and Blue</option>
-				<option value="blue">Blue and Yellow</option>
-			</select>
+			}
+			{validated &&
+				<select name="color" onChange={setColor}>
+					<option value="green">Green and Purple</option>
+					<option value="red">Red and Blue</option>
+					<option value="blue">Blue and Yellow</option>
+				</select>}
 		</main>
 
 	)

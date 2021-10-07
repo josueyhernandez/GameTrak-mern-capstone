@@ -17,12 +17,30 @@ export default function AttributePage() {
     const [attrAList, setAttrAList] = useState()
     const [attrBList, setAttrBList] = useState()
     const [chars, setChars] = useState()
+    const [validated, setValidated] = useState(true);
+    async function validateToken() {
+		if (state) {
+            console.log("test")
+			await axios
+				.post('/api/auth', {
+					token: state.token
+				})
+				.then((res) => {
+					setValidated(res.data._id === state.id)
+					console.log(res.data)
+				})
+                .catch((err)=>{
+                    setValidated(false)
+                })
+		}
+	}
+	useEffect(validateToken,[state])
 
     const colorScheme = useProvideStyle();
 
     document.body.setAttribute("id", colorScheme.getStyle())
 
-    function setColor(color){
+    function setColor(color) {
         console.log(color.target.value)
         colorScheme.setNewStyle(color.target.value)
         document.body.id = colorScheme.getStyle()
@@ -62,12 +80,12 @@ export default function AttributePage() {
             toast.error("Name Your New Attribute")
         } else {
             await axios
-            .post('/api/attr', {
-                name: attrName,
-                type: attrType,
-                game: state.currentGame.id,
-                owned: false
-            })
+                .post('/api/attr', {
+                    name: attrName,
+                    type: attrType,
+                    game: state.currentGame.id,
+                    owned: false
+                })
             await axios
                 .get(`/api/chars/${state.currentGame.id}`)
                 .then(async res => {
@@ -103,9 +121,16 @@ export default function AttributePage() {
     }
     return (
         <main>
+            {validated && <div className = "main">
             {/* <button onClick={testButton}>Test Button</button> */}
             <div className="log">
-                <Button className="logout" onClick={() => window.location.replace("/")}>Logout</Button>
+                <Button className="logout" onClick={() => {
+                    dispatch({
+                        type: 'LOGOUT',
+                        info: "TEST",
+                    })
+                    window.location.replace("/")
+                }}>Logout</Button>
                 <Button className="back" onClick={() => window.location.replace("/games")}>Back to List</Button>
                 <div id="current-game">
                     {state.currentGame && <div id="game-title">{state.currentGame.name}</div>}
@@ -157,21 +182,21 @@ export default function AttributePage() {
                     <div>
                         <b>Letters Attributes</b>
                         {attrAList !== undefined && attrAList.map(attribute => {
-                            if(!attribute.owned){
-                            return (
-                                <div key={attribute._id}>{attribute.name}</div>
-                            )
+                            if (!attribute.owned) {
+                                return (
+                                    <div key={attribute._id}>{attribute.name}</div>
+                                )
                             }
                         })}
                     </div>
                     <div>
                         <b>Numbers Attributes</b>
                         {attrBList !== undefined && attrBList.map(attribute => {
-                            if(!attribute.owned){
+                            if (!attribute.owned) {
                                 return (
                                     <div key={attribute._id}>{attribute.name}</div>
                                 )
-                                }
+                            }
                         })}
                     </div>
                 </div>
@@ -189,12 +214,13 @@ export default function AttributePage() {
                 draggable
                 pauseOnHover
             />
-            
+
             <select name="color" onChange={setColor}>
                 <option value="green">Green and Purple</option>
                 <option value="red">Red and Blue</option>
                 <option value="blue">Blue and Yellow</option>
             </select>
+            </div>}
         </main>
     )
 }

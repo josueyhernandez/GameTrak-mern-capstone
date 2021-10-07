@@ -14,14 +14,32 @@ export default function SkillsPage() {
     const [skillType, setSkillType] = useState()
     const [skills, setSkills] = useState()
     const colorScheme = useProvideStyle()
+    const [validated, setValidated] = useState(true);
+    async function validateToken() {
+		if (state) {
+            console.log("test")
+			await axios
+				.post('/api/auth', {
+					token: state.token
+				})
+				.then((res) => {
+					setValidated(res.data._id === state.id)
+					console.log(res.data)
+				})
+                .catch((err)=>{
+                    setValidated(false)
+                })
+		}
+	}
+	useEffect(validateToken,[state])
 
     document.body.setAttribute("id", colorScheme.getStyle())
     async function showSkills() {
-        if(state.currentGame !== null){
-        await axios.get(`/api/skill/${state.currentGame.id}`)
-            .then((res) => {
-                setSkills(res.data)
-            })
+        if (state.currentGame !== null) {
+            await axios.get(`/api/skill/${state.currentGame.id}`)
+                .then((res) => {
+                    setSkills(res.data)
+                })
         }
     }
     function setColor(color) {
@@ -47,8 +65,15 @@ export default function SkillsPage() {
 
     return (
         <main>
+            {validated && <div className = "main">
             <div className="log">
-                <Button className="logout" onClick={() => window.location.replace("/")}>Logout</Button>
+                <Button className="logout" onClick={() => {
+                    dispatch({
+                        type: 'LOGOUT',
+                        info: "TEST",
+                    })
+                    window.location.replace("/")
+                }}>Logout</Button>
                 <Button className="back" onClick={() => window.location.replace("/games")}>Back to List</Button>
                 <div id="current-game">
                     {state.currentGame && <div id="game-title">{state.currentGame.name}</div>}
@@ -94,9 +119,9 @@ export default function SkillsPage() {
                 </Form.Group>
                 <h4>List of Skills:</h4>
                 <div id="skills-list">
-                    {skills !== undefined && skills.map(skill=>{
-                        return(
-                            <div className = "displayed-skill">
+                    {skills !== undefined && skills.map(skill => {
+                        return (
+                            <div className="displayed-skill">
                                 <div>Name: {skill.name} </div>
                                 {skill.type && <div>Type: {skill.type}</div>}
                                 {skill.description && <div> {skill.description}</div>}
@@ -113,7 +138,7 @@ export default function SkillsPage() {
                 <option value="green">Green and Purple</option>
                 <option value="red">Red and Blue</option>
                 <option value="blue">Blue and Yellow</option>
-            </select>
+            </select></div>}
         </main>
     )
 }
