@@ -1,3 +1,30 @@
 .skill {
     color: blue
 }
+#skill-forms{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-group{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#skills-list{
+
+    display: flex;
+    flex-wrap: wrap;
+}
+.displayed-skill{
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    border: black 4px solid;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+}

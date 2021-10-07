@@ -6,6 +6,9 @@ import authRouter from './auth'
 import charsRouter from './chars'
 import uploadRouter from './upload'
 import attrRouter from './attr'
+import skillRouter from './skill'
+import placeRouter from './places'
+import itemsRouter from './item'
 
 const router = express.Router()
 
@@ -32,4 +35,7 @@ router.use('/auth', authRouter)
 router.use('/chars', charsRouter)
 router.use('/upload', uploadRouter)
 router.use('/attr', attrRouter)
+router.use('/skill', skillRouter)
+router.use('/places', placeRouter)
+router.use('/items', itemsRouter)
 module.exports = router

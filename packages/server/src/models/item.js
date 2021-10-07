@@ -1,11 +1,11 @@
 import mongoose from 'mongoose'
 const { ObjectId } = mongoose.Schema.Types
 
-const SkillSchema = new mongoose.Schema({
+const ItemSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    default: "Unnamed Skill"
+    default: "Unnamed Item"
   },
   type: {
     type: String,
@@ -22,6 +22,6 @@ const SkillSchema = new mongoose.Schema({
 
 })
 
-const Skill = mongoose.model('Skill', SkillSchema)
+const Item = mongoose.model('Item', ItemSchema)
 
-export default Skill
+export default Item
