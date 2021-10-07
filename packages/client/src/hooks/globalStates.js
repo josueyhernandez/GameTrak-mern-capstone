@@ -6,18 +6,23 @@ const initialState = {
     username: null,
     image: null,
     games: null,
-    currentGame: null
+    currentGame: null,
+    token: null
 }
+
 const userReducer = (state, action) => {
     switch (action.type) {
         case 'CHANGE_USER':
+            console.log(action)
             localStorage.setItem('User', JSON.stringify(action.info))
+            localStorage.setItem('Token', JSON.stringify(action.token))
             return {
                 ...state,
                 id: action.info._id,
                 username: action.info.username,
                 image: action.info.image,
-                games: action.info.games
+                games: action.info.games,
+                token: action.token
             }
         case 'SELECT_GAME':
             localStorage.setItem('CurrentGame', JSON.stringify(action.info))
@@ -28,12 +33,14 @@ const userReducer = (state, action) => {
         case 'LOGOUT':
             localStorage.clear('User')
             localStorage.clear('CurrentGame')
+            localStorage.clear('Token')
             return {
                 id: null,
                 username: null,
                 image: null,
                 games: null,
-                currentGame: null
+                currentGame: null,
+                token: false
             }
         default:
             return state;
@@ -60,12 +67,14 @@ export const useProvideUser = () => {
     const { state, dispatch } = useUser();
     useEffect(() => {
         const savedUser = JSON.parse(localStorage.getItem('User')) || false
+        const savedToken = JSON.parse(localStorage.getItem('Token')) || false
         const savedCurrentGame = JSON.parse(localStorage.getItem('CurrentGame')) || false
         console.log(savedUser)
         if (savedUser) {
             dispatch({
                 type: 'CHANGE_USER',
                 info: savedUser,
+                token: savedToken
             })
         }
         if (savedCurrentGame) {

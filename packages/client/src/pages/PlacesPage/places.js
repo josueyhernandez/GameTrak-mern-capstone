@@ -14,6 +14,25 @@ export default function PlacesPage() {
     const [placeDes, setPlaceDes] = useState()
     const [places, setPlaces] = useState()
     const colorScheme = useProvideStyle();
+    const [validated, setValidated] = useState(true);
+    async function validateToken() {
+		if (state) {
+            console.log("test")
+			await axios
+				.post('/api/auth', {
+					token: state.token
+				})
+				.then((res) => {
+					setValidated(res.data._id === state.id)
+					console.log(res.data)
+				})
+                .catch((err)=>{
+                    setValidated(false)
+                })
+		}
+	}
+	useEffect(validateToken,[state])
+    
 
     document.body.setAttribute("id", colorScheme.getStyle())
 
@@ -37,19 +56,26 @@ export default function PlacesPage() {
             })
     }
     async function showPlaces() {
-        if(state.currentGame !== null){
-        await axios.get(`/api/places/${state.currentGame.id}`)
-            .then((res) => {
-                setPlaces(res.data)
-            })
+        if (state.currentGame !== null) {
+            await axios.get(`/api/places/${state.currentGame.id}`)
+                .then((res) => {
+                    setPlaces(res.data)
+                })
         }
     }
     useEffect(showPlaces, [state])
 
     return (
         <main>
+            {validated && <div className = "main">
             <div className="log">
-                <Button className="logout" onClick={() => window.location.replace("/")}>Logout</Button>
+                <Button className="logout" onClick={() => {
+                    dispatch({
+                        type: 'LOGOUT',
+                        info: "TEST",
+                    })
+                    window.location.replace("/")
+                }}>Logout</Button>
                 <Button className="back" onClick={() => window.location.replace("/games")}>Back to List</Button>
                 <div id="current-game">
                     {state.currentGame && <div id="game-title">{state.currentGame.name}</div>}
@@ -94,25 +120,33 @@ export default function PlacesPage() {
                 </Form.Group>
             </div>
             <h4>List of Places:</h4>
-                <div id="places-list">
-                    {places !== undefined && places.map(place=>{
-                        return(
-                            <div className = "displayed-place">
-                                <div>Name: {place.name} </div>
-                                {place.type && <div>Type: {place.type}</div>}
-                                {place.description && <div> {place.description}</div>}
-                            </div>
-                        )
-                    })}
+            <div id="places-list">
+                {places !== undefined && places.map(place => {
+                    return (
+                        <div className="displayed-place">
+                            <div>Name: {place.name} </div>
+                            {place.type && <div>Type: {place.type}</div>}
+                            {place.description && <div> {place.description}</div>}
+                        </div>
+                    )
+                })}
 
-                </div>
+            </div>
 
+<<<<<<< HEAD
                 <label for="color" id="bottom">Please select a color:</label>
                 <select id="color" onChange={setColor}>
                     <option value="green">Green and Purple</option>
                     <option value="red">Red and Blue</option>
                     <option value="blue">Blue and Yellow</option>
                 </select>
+=======
+            <select name="color" onChange={setColor}>
+                <option value="green">Green and Purple</option>
+                <option value="red">Red and Blue</option>
+                <option value="blue">Blue and Purple</option>
+            </select></div>}
+>>>>>>> 4e90ea7 (implementetd json web token)
         </main>
     )
 }

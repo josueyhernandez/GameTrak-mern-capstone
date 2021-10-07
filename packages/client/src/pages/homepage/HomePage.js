@@ -33,13 +33,15 @@ export default function HomePage(props) {
         password,
       })
       .then(function (res) {
+        console.log(res.data)
         if (res.data.valid === true) {
-
           dispatch({
             type: 'CHANGE_USER',
             info: res.data.user,
+            token: res.data.token
           })
           toast.success("Login Successful!")
+          
           window.location.replace("/games")
           console.log(state)
           setLoginStatus(2);

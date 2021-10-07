@@ -88,10 +88,11 @@ export default function RegisterPage() {
       password: data.password,
       email: data.email
     }).then(res => {
+      console.log(res.data.token)
       toast.success("Registration successful!")
       setTimeout(function () {
         window.location.replace("/")
-      }, 3000);
+      }, 1500);
     }
     )
       .catch(err => {

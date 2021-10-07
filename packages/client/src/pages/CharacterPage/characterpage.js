@@ -7,6 +7,7 @@ import axios from "axios"
 import { Button, Form } from "react-bootstrap";
 import { useProvideStyle } from 'hooks/useStyle';
 
+
 const initialChar = {
     name: "SELECT A CHARACTER",
     description: "SELECT A CHARACTER",
@@ -25,7 +26,29 @@ export default function CharacterPage() {
     const [selectedAttr, setSelectedAttr] = useState()
     const { state, dispatch } = useProvideUser()
     const colorScheme = useProvideStyle();
+    const [validated, setValidated] = useState(false);
 
+    async function validateToken() {
+
+        if (state) {
+            await axios
+                .post('/api/auth', {
+                    token: state.token
+                })
+                .then((res) => {
+                    setValidated(res.data._id === state.id)
+                    console.log(res.data)
+                })
+                .catch((err) => {
+                    setValidated(false)
+                })
+        }
+        else {
+            console.log(state)
+            setValidated(false)
+        }
+    }
+    useEffect(validateToken, [state])
     document.body.setAttribute("id", colorScheme.getStyle())
 
     function testButton() {
@@ -84,7 +107,7 @@ export default function CharacterPage() {
         setEditMode(true)
         setSelectedAttr(e)
     }
-    async function changeAttr(e){
+    async function changeAttr(e) {
         setCurrAttr([])
         setEditMode(false)
         await axios.put('/api/chars/change-attribute', {
@@ -92,112 +115,132 @@ export default function CharacterPage() {
             attribute: selectedAttr.info._id,
             newValue: editVal
         })
-        .then(res=>console.log(res.data))
+            .then(res => console.log(res.data))
         axios.get(`/api/chars/character/${currentChar.id}`)
-                .then((res) => {
-                    obtainAttrInfo(res.data.attributes)
-                })
+            .then((res) => {
+                obtainAttrInfo(res.data.attributes)
+            })
     }
     useEffect(selectCharacter, [state])
 
-    function setColor(color){
+    function setColor(color) {
         console.log(color.target.value)
         colorScheme.setNewStyle(color.target.value)
         document.body.id = colorScheme.getStyle()
     }
 
     return (
-        <main>
-            {/* <button onClick={getatt}>Test Button</button> */}
-            <div className="log">
-                <Button className="logout" onClick={() => window.location.replace("/")}>Logout</Button>
-                <Button className="back" onClick={() => window.location.replace("/games")}>Back to List</Button>
-                <div id="current-game">
-                    {state.currentGame && <div id="game-title">{state.currentGame.name}</div>}
-                    {state.currentGame && <img height="50px" src={state.currentGame.image} />}
-                </div>
-            </div>
-            <div className="header">
-                <h3><a className="header-item" href="/character">Character</a></h3>
-                <h3><a className="header-item" href="/item">Items</a></h3>
-                <h3><a className="header-item" href="/places">Places</a></h3>
-                <h3><a className="header-item" href="/skills">Skills</a></h3>
-                <h3><a className="header-item" href="/attributes">Attributes</a></h3>
-            </div>
 
-            <div class="character-select">
-                <label for="character">Select Character: </label>
-                <select name="characters" id="characters" class="characters" onChange={changeCharacter}>
-                    <option value="none">None</option>
-                    {/* <option value="Scorpion">Scorpion</option>
+        <main>
+            {validated ? <div className="main">
+                {/* <button onClick={getatt}>Test Button</button> */}
+                <div className="log">
+                    <Button className="logout" onClick={() => {
+                        dispatch({
+                            type: 'LOGOUT',
+                            info: "TEST",
+                        })
+                        window.location.replace("/")
+                    }}>Logout</Button>
+                    <Button className="back" onClick={() => window.location.replace("/games")}>Back to List</Button>
+                    <div id="current-game">
+                        {state.currentGame && <div id="game-title">{state.currentGame.name}</div>}
+                        {state.currentGame && <img height="50px" src={state.currentGame.image} />}
+                    </div>
+                </div>
+                <div className="header">
+                    <h3><a className="header-item" href="/character">Character</a></h3>
+                    <h3><a className="header-item" href="/item">Items</a></h3>
+                    <h3><a className="header-item" href="/places">Places</a></h3>
+                    <h3><a className="header-item" href="/skills">Skills</a></h3>
+                    <h3><a className="header-item" href="/attributes">Attributes</a></h3>
+                </div>
+
+                <div class="character-select">
+                    <label for="character">Select Character: </label>
+                    <select name="characters" id="characters" class="characters" onChange={changeCharacter}>
+                        <option value="none">None</option>
+                        {/* <option value="Scorpion">Scorpion</option>
                     <option value="sub-zero">Sub-zero</option>
                     <option value="liuKang">Liu Kang</option>
                     <option value="sonya">Sonya Blade</option> */}
-                    {state && charList.map(char => {
-                        return (
-                            <option key={char._id} value={char._id}>{char.name}</option>
-                        )
-                    })}
-                </select>
-                {/* <button class="submit" onClick={selectCharacter}>Submit</button> */}
-            </div>
-            <h2><a href="/create" class="create">Create New</a></h2>
+                        {state && charList.map(char => {
+                            return (
+                                <option key={char._id} value={char._id}>{char.name}</option>
+                            )
+                        })}
+                    </select>
+                    {/* <button class="submit" onClick={selectCharacter}>Submit</button> */}
+                </div>
+                <h2><a href="/create" class="create">Create New</a></h2>
 
-            <div>
+                <div>
 
-                {state.currentGame && <h1 class="game-title">{state.currentGame.name} Characters</h1>}
-            </div>
-            <div class="characterId">
-                <div class="character-info">
-                    <h2 class="characterName">{currentChar.name}</h2>
-                    <p>Name: <span class="name">{currentChar.name}</span></p>
-                    {/* <p>Gender: <span class="gender"></span></p> */}
-                    {/* <p>Attributes: <span class="attributes"></span></p>
+                    {state.currentGame && <h1 class="game-title">{state.currentGame.name} Characters</h1>}
+                </div>
+                <div class="characterId">
+                    <div class="character-info">
+                        <h2 class="characterName">{currentChar.name}</h2>
+                        <p>Name: <span class="name">{currentChar.name}</span></p>
+                        {/* <p>Gender: <span class="gender"></span></p> */}
+                        {/* <p>Attributes: <span class="attributes"></span></p>
                     <p>Strength: </p>
                     <p>Agility: </p>
                     <p>Endurance: </p>
                     <p>Skills: </p> */}
-                    {state.currentGame && <div class="description">
-                        <p>Description: {currentChar.description}</p>
+                        {state.currentGame && <div class="description">
+                            <p>Description: {currentChar.description}</p>
 
-                    </div>}
-                    {currentChar.id !== null && <img height="400px" src={currentChar.image} alt="Choose a character" />}
-                </div>
-                <div>
-                    {(currAttr.length > 0) && currAttr.map(attribute => {
-                        return (
-                            <div className="attribute" key={attribute.info._id}>
-                                <h3>{attribute.info.name}:</h3>
-                                <h4> {attribute.info.value}</h4>
-                                <div onClick = {()=>{
-                                    editAttr(attribute)
-                                }} id="edit-button-att">✎</div>
-                            </div>
-                        )
-                    })}
-                </div>
-                {editMode &&
-                <Form id = "edit-att">
-                    <Form.Label>Edit {selectedAttr?.info?.name}</Form.Label>
-                    {selectedAttr?.type === 1 &&<Form.Control onChange = {(e)=>{
-                        setEditVal(e.target.value)
-                    }} type="text" placeholder= {`Edit ${selectedAttr?.info?.name} Here`} />}
-                    {selectedAttr?.type === 2 &&<Form.Control onChange = {(e)=>{
-                        setEditVal(e.target.value)
-                    }} type="number" placeholder= {`Edit ${selectedAttr?.info?.name} Here`} />}
-                    <Button onClick = {changeAttr}>Accept Changes</Button>
-                    <Button onClick = {()=>{
-                        setEditMode(false)
-                    }}>Cancel</Button>
+                        </div>}
+                        {currentChar.id !== null && <img height="400px" src={currentChar.image} alt="Choose a character" />}
+                    </div>
+                    <div>
+                        {(currAttr.length > 0) && currAttr.map(attribute => {
+                            return (
+                                <div className="attribute" key={attribute.info._id}>
+                                    <h3>{attribute.info.name}:</h3>
+                                    <h4> {attribute.info.value}</h4>
+                                    <div onClick={() => {
+                                        editAttr(attribute)
+                                    }} id="edit-button-att">✎</div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                    {editMode &&
+                        <Form id="edit-att">
+                            <Form.Label>Edit {selectedAttr?.info?.name}</Form.Label>
+                            {selectedAttr?.type === 1 && <Form.Control onChange={(e) => {
+                                setEditVal(e.target.value)
+                            }} type="text" placeholder={`Edit ${selectedAttr?.info?.name} Here`} />}
+                            {selectedAttr?.type === 2 && <Form.Control onChange={(e) => {
+                                setEditVal(e.target.value)
+                            }} type="number" placeholder={`Edit ${selectedAttr?.info?.name} Here`} />}
+                            <Button onClick={changeAttr}>Accept Changes</Button>
+                            <Button onClick={() => {
+                                setEditMode(false)
+                            }}>Cancel</Button>
 
-                </Form>}
+                        </Form>}
+                </div>
+                <select name="color" onChange={setColor}>
+                    <option value="green">Green and Purple</option>
+                    <option value="red">Red and Blue</option>
+                    <option value="blue">Blue and Yellow</option>
+                </select>
             </div>
-            <label for="color" id="bottom">Please select a color:</label>
-            <select id="color" onChange={setColor}>
-                <option value="green">Green and Purple</option>
-                <option value="red">Red and Blue</option>
-                <option value="blue">Blue and Yellow</option>
-            </select>
+                :
+                <div className="main">
+                    {/* <h3>You are not authorized to use this page yet </h3>
+                    <button onClick={() => {
+                        dispatch({
+                            type: 'LOGOUT',
+                            info: "TEST",
+                        })
+                        window.location.replace("/")
+                    }}>Go Back To Login</button> */}
+                </div>
+            }
         </main>
-  );
+    );
 }
