@@ -101,6 +101,13 @@ body {
 .game:hover{
   border: white solid 5px;
 }
+.game-list{
+  display: flex;
+  justify-content:left;
+  flex-wrap: wrap;
+  border-top: white 5px solid;
+  border-bottom: white 5px solid;
+}
 #green .game-list{
   background-color: rgb(126, 151, 126);
   display: flex;

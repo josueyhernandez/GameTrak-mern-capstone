@@ -15,7 +15,7 @@ export default function GamesPage(props) {
 	const [list, setList] = useState([]);
 	const colorScheme = useProvideStyle();
 
-  	document.body.setAttribute("id", colorScheme.getStyle())
+	document.body.setAttribute("id", colorScheme.getStyle())
 	async function test() {
 		console.log(GameData.type)
 		console.log(state)
@@ -27,14 +27,14 @@ export default function GamesPage(props) {
 		})
 	}
 	const changeGameImage = async (event) => {
-        const imageToUpload = event.target.files[0]
-        console.log(imageToUpload)
-        let formData = new FormData();
-        formData.append('image', imageToUpload);
-        const uploadedImage = await axios.post('/api/upload',formData)
-        console.log(uploadedImage.data);
-        setNewImage(uploadedImage.data)
-      }
+		const imageToUpload = event.target.files[0]
+		console.log(imageToUpload)
+		let formData = new FormData();
+		formData.append('image', imageToUpload);
+		const uploadedImage = await axios.post('/api/upload', formData)
+		console.log(uploadedImage.data);
+		setNewImage(uploadedImage.data)
+	}
 	async function createGame() {
 		// await axios
 		// .post("/api/games",{
@@ -128,14 +128,15 @@ export default function GamesPage(props) {
 		return user
 	}
 
-	function setColor(color){
+	function setColor(color) {
 		console.log(color.target.value)
 		colorScheme.setNewStyle(color.target.value)
 		document.body.id = colorScheme.getStyle()
-	  }
+	}
 
 
 	useEffect(listGames, [state])
+
 
 	return (
 		<main>
@@ -146,12 +147,16 @@ export default function GamesPage(props) {
 				<div className="buttons">
 					<Button onClick={createGame}>New Game</Button>
 					<Button onClick={() => {
+						dispatch({
+							type: 'LOGOUT',
+							info: "TEST",
+						})
 						window.location.replace("/")
 						// create a logout dispatch
 					}}>Logout</Button>
 				</div>
 
-				<Form.Group id = "new-game">
+				<Form.Group id="new-game">
 					<Form.Label>New Game Name:</Form.Label>
 					<Form.Control
 						type="game-name"
@@ -164,7 +169,7 @@ export default function GamesPage(props) {
 					<Form.Control
 						type="file"
 						name="game-image"
-						
+
 						onChange={changeGameImage}
 					>
 					</Form.Control>
@@ -196,7 +201,7 @@ export default function GamesPage(props) {
 										</svg>
 									</div>
 									<div className="icon" onClick={async () => {
-										
+
 										await axios.delete('/api/games/', {
 											data: {
 												gameId: game.id,
@@ -220,12 +225,12 @@ export default function GamesPage(props) {
 												// console.log(res)
 												user = res
 											})
-											console.log(user)
-											dispatch({
-												type: 'CHANGE_USER',
-												info: user.data,
-											})
-											window.location.reload();
+										console.log(user)
+										dispatch({
+											type: 'CHANGE_USER',
+											info: user.data,
+										})
+										window.location.reload();
 
 									}
 									}>
@@ -244,10 +249,10 @@ export default function GamesPage(props) {
 
 			</div>
 			<select name="color" onChange={setColor}>
-            	<option value="green">Green and Purple</option>
-            	<option value="red">Red and Blue</option>
-            	<option value="blue">Blue and Yellow</option>
-          </select>
+				<option value="green">Green and Purple</option>
+				<option value="red">Red and Blue</option>
+				<option value="blue">Blue and Yellow</option>
+			</select>
 		</main>
 
 	)

@@ -154,16 +154,16 @@ export default function RegisterPage() {
           />
         </Form.Group>
         <Form.Group>
-        <Button block size="lg" type="submit" className="button" onClick={goBack}>Back</Button>
+        <Button block size="lg"  className="button" onClick={goBack}>Back</Button>
         <Button block size="lg" type="submit" className="button">Register</Button>
         </Form.Group>
-        
-      </Form>
       <select name="color" onChange={setColor}>
         <option value="green">Green and Purple</option>
         <option value="red">Red and Blue</option>
         <option value="blue">Blue and Yellow</option>
       </select>
+        
+      </Form>
       <ToastContainer
         position="top-right"
         autoClose={5000}
