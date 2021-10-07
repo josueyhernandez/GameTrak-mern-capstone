@@ -9,6 +9,8 @@ import "./HomePage.css"
 import { useProvideUser } from 'hooks/globalStates'
 import image from "./profile.jpg";
 import { useProvideStyle } from 'hooks/useStyle';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 const axios = require('axios');
 
 export default function HomePage(props) {
@@ -37,10 +39,13 @@ export default function HomePage(props) {
             type: 'CHANGE_USER',
             info: res.data.user,
           })
+          toast.success("Login Successful!")
           window.location.replace("/games")
           console.log(state)
           setLoginStatus(2);
+          
         } else {
+          toast.error("Invalid Information")
           setLoginStatus(1);
         }
       })
@@ -89,7 +94,15 @@ export default function HomePage(props) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            </Form.Group>
+            <Button
+              block
+              size="lg"
+              type="submit"
+              className="button"
+              disabled={!validateForm()}
+            >
+              Login
+            </Button>
             <Button
               block
               size="lg"
@@ -100,18 +113,10 @@ export default function HomePage(props) {
             >
               SignUp
             </Button>
-            <Button
-              block
-              size="lg"
-              type="submit"
-              className="button"
-              disabled={!validateForm()}
-            >
-              Login
-            </Button>
-            {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
-            {loginStatus === 1 && <div>LOGIN FAILED</div>}
-            <Button onClick = {testButton}>t</Button>
+            </Form.Group>
+            {/* {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
+            {loginStatus === 1 && <div>LOGIN FAILED</div>} */}
+            {/* <Button onClick = {testButton}>t</Button> */}
           </Form>
           <select name="color" onChange={setColor}>
             <option value="green">Green and Purple</option>
@@ -120,6 +125,17 @@ export default function HomePage(props) {
           </select>
         </div>
       )}
+      <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
     </main>
   );
 }

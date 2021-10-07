@@ -8,8 +8,8 @@ const initialState = {
     games: null,
     currentGame: null
 }
-const userReducer = (state, action) =>{
-    switch(action.type){
+const userReducer = (state, action) => {
+    switch (action.type) {
         case 'CHANGE_USER':
             localStorage.setItem('User', JSON.stringify(action.info))
             return {
@@ -21,13 +21,21 @@ const userReducer = (state, action) =>{
             }
         case 'SELECT_GAME':
             localStorage.setItem('CurrentGame', JSON.stringify(action.info))
-            return{
+            return {
                 ...state,
                 currentGame: action.info
             }
         case 'LOGOUT':
-
-        default: 
+            localStorage.clear('User')
+            localStorage.clear('CurrentGame')
+            return {
+                id: null,
+                username: null,
+                image: null,
+                games: null,
+                currentGame: null
+            }
+        default:
             return state;
     }
 
@@ -35,41 +43,41 @@ const userReducer = (state, action) =>{
 const userContext = createContext()
 export const useUser = () => {
     return useContext(userContext)
-  }
-export default function ProvideUser({children}) {
+}
+export default function ProvideUser({ children }) {
     const [state, dispatch] = useReducer(userReducer, initialState)
     return (
         <userContext.Provider value={{
-                state,
-                dispatch,
-            }}>
-                {children}
+            state,
+            dispatch,
+        }}>
+            {children}
         </userContext.Provider>
     )
 }
 
-export const useProvideUser = () =>{
-    const {state, dispatch} = useUser();
+export const useProvideUser = () => {
+    const { state, dispatch } = useUser();
     useEffect(() => {
         const savedUser = JSON.parse(localStorage.getItem('User')) || false
         const savedCurrentGame = JSON.parse(localStorage.getItem('CurrentGame')) || false
         console.log(savedUser)
         if (savedUser) {
-          dispatch({
-            type: 'CHANGE_USER',
-            info: savedUser,
-          })
+            dispatch({
+                type: 'CHANGE_USER',
+                info: savedUser,
+            })
         }
         if (savedCurrentGame) {
             dispatch({
-              type: 'SELECT_GAME',
-              info: savedCurrentGame,
+                type: 'SELECT_GAME',
+                info: savedCurrentGame,
             })
-          }
-      }, [dispatch])
+        }
+    }, [dispatch])
 
     //create functions that call to the backend with axios for frontend use
-    return{
+    return {
         state,
         dispatch,
         userReducer
