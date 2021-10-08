@@ -169,7 +169,11 @@ body {
   border-bottom: double white 3px;
 }
 
+<<<<<<< HEAD
 #color {
+=======
+select {
+>>>>>>> c975b27 (rebasing)
   position: absolute;
   bottom: 0;
   right: 0;
@@ -177,6 +181,10 @@ body {
 
 #bottom {
   position: absolute;
+<<<<<<< HEAD
   bottom: 20px;
+=======
+  bottom: 11px;
+>>>>>>> c975b27 (rebasing)
   right: 0;
 }

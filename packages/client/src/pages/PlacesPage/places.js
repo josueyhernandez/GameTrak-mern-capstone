@@ -135,6 +135,7 @@ export default function PlacesPage() {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <label for="color" id="bottom">Please select a color:</label>
                 <select id="color" onChange={setColor}>
                     <option value="green">Green and Purple</option>
@@ -145,10 +146,15 @@ export default function PlacesPage() {
 =======
 >>>>>>> 02eaa6e (rebase)
             <select name="color" onChange={setColor}>
+=======
+            <label for="color" id="bottom">Please select a color:</label>
+            <select id="color" onChange={setColor}>
+>>>>>>> c975b27 (rebasing)
                 <option value="green">Green and Purple</option>
                 <option value="red">Red and Blue</option>
                 <option value="blue">Blue and Purple</option>
             </select></div>}
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 4e90ea7 (implementetd json web token)
 =======
@@ -161,6 +167,8 @@ export default function PlacesPage() {
                 </select>
 >>>>>>> 3deb71f (Added label)
 >>>>>>> 02eaa6e (rebase)
+=======
+>>>>>>> c975b27 (rebasing)
         </main>
     )
 }
