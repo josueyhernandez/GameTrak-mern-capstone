@@ -257,6 +257,7 @@ export default function CreatePage() {
                     draggable
                     pauseOnHover
                 />
+
                 <label for="color" id="bottom">Please select a color:</label>
                 <select id="color" onChange={setColor}>
                     <option value="green">Green and Purple</option>
@@ -270,6 +271,7 @@ export default function CreatePage() {
                         window.location.replace("/")
                     }}>Go Back To Login</button> */}
                 </div>}
+
         </main>
     )
 }

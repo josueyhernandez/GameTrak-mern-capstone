@@ -132,6 +132,7 @@ export default function PlacesPage() {
                 })}
 
             </div>
+
             <label for="color" id="bottom">Please select a color:</label>
             <select id="color" onChange={setColor}>
                 <option value="green">Green and Purple</option>

@@ -279,6 +279,7 @@ export default function GamesPage(props) {
 					<option value="red">Red and Blue</option>
 					<option value="blue">Blue and Yellow</option>
 				</select></>}
+
 		</main>
 
 	)
