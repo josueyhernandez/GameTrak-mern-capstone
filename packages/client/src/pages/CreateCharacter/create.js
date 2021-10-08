@@ -246,35 +246,6 @@ export default function CreatePage() {
                         {!clickedSubmit && <button class="characterPage" onClick={() => window.location.replace("/character")}>Character Page</button>}
                     </div>
                 </div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <div>
-                    {!clickedSubmit && <button class="characterPage" onClick={() => window.location.replace("/character")}>Character Page</button>}
-                </div>
-            </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-            <label for="color" id="bottom">Please select a color:</label>
-            <select id="color" onChange={setColor}>
-                <option value="green">Green and Purple</option>
-                <option value="red">Red and Blue</option>
-                <option value="blue">Blue and Yellow</option>
-            </select>
-=======
-=======
->>>>>>> 02eaa6e (rebase)
-=======
->>>>>>> c975b27 (rebasing)
                 <ToastContainer
                     position="top-right"
                     autoClose={5000}
@@ -299,37 +270,6 @@ export default function CreatePage() {
                         window.location.replace("/")
                     }}>Go Back To Login</button> */}
                 </div>}
-
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 4e90ea7 (implementetd json web token)
-=======
-=======
-                <div>
-                    {!clickedSubmit && <button class="characterPage" onClick={() => window.location.replace("/character")}>Character Page</button>}
-                </div>
-            </div>
-            <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
-            <label for="color">Please select a color:</label>
-            <select id="color" onChange={setColor}>
-                <option value="green">Green and Purple</option>
-                <option value="red">Red and Blue</option>
-                <option value="blue">Blue and Yellow</option>
-            </select>
->>>>>>> 3deb71f (Added label)
->>>>>>> 02eaa6e (rebase)
-=======
->>>>>>> c975b27 (rebasing)
         </main>
     )
 }

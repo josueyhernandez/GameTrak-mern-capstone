@@ -136,23 +136,9 @@ export default function ItemsPage() {
 
                 </div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-                <label for="color" id="bottom">Please select a color:</label>
-                <select id="color" onChange={setColor}>
-                    <option value="green">Green and Purple</option>
-                    <option value="red">Red and Blue</option>
-                    <option value="blue">Blue and Yellow</option>
-                </select>
-=======
-=======
->>>>>>> 02eaa6e (rebase)
-            <select name="color" onChange={setColor}>
-=======
+            
             <label for="color" id="bottom">Please select a color:</label>
             <select id="color" onChange={setColor}>
->>>>>>> c975b27 (rebasing)
                 <option value="green">Green and Purple</option>
                 <option value="red">Red and Blue</option>
                 <option value="blue">Blue and Purple</option>
@@ -169,21 +155,6 @@ export default function ItemsPage() {
             }}>Go Back To Login</button> */}
         </div>
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> 4e90ea7 (implementetd json web token)
-=======
-=======
-                <label for="color">Please select a color:</label>
-                <select id="color" onChange={setColor}>
-                    <option value="green">Green and Purple</option>
-                    <option value="red">Red and Blue</option>
-                    <option value="blue">Blue and Yellow</option>
-                </select>
->>>>>>> 3deb71f (Added label)
->>>>>>> 02eaa6e (rebase)
-=======
->>>>>>> c975b27 (rebasing)
         </main>
     )
 }

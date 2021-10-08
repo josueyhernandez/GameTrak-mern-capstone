@@ -170,10 +170,17 @@ body {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 #color {
 =======
 select {
 >>>>>>> c975b27 (rebasing)
+=======
+select {
+=======
+#color {
+>>>>>>> f8cb109 (repositioned style selector)
+>>>>>>> 2fe5b40 (repositioned style selector)
   position: absolute;
   bottom: 0;
   right: 0;
@@ -181,6 +188,7 @@ select {
 
 #bottom {
   position: absolute;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   bottom: 20px;
@@ -192,4 +200,12 @@ select {
   bottom: 24px;
   right: 6px;
 >>>>>>> db6e6c2 (rebasing)
+=======
+  bottom: 24px;
+  right: 6px;
+=======
+  bottom: 20px;
+  right: 0;
+>>>>>>> f8cb109 (repositioned style selector)
+>>>>>>> 2fe5b40 (repositioned style selector)
 }

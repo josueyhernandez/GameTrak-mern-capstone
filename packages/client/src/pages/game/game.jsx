@@ -272,43 +272,13 @@ export default function GamesPage(props) {
 					})
 				}
 			</div>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-			<label for="color" id="bottom">Please select a color:</label>
-      		<select id="color" onChange={setColor}>
-        		<option value="green">Green and Purple</option>
-        		<option value="red">Red and Blue</option>
-        		<option value="blue">Blue and Yellow</option>
-      		</select>
-=======
-=======
->>>>>>> 02eaa6e (rebase)
-=======
->>>>>>> db6e6c2 (rebasing)
 			}
 			{validated &&
 				<><label for="color" id="bottom">Please select a color:</label><select id="color" onChange={setColor}>
 					<option value="green">Green and Purple</option>
 					<option value="red">Red and Blue</option>
 					<option value="blue">Blue and Yellow</option>
-<<<<<<< HEAD
-				</select>}
-<<<<<<< HEAD
->>>>>>> 4e90ea7 (implementetd json web token)
-=======
-=======
-			<label for="color">Please select a color:</label>
-      		<select id="color" onChange={setColor}>
-        		<option value="green">Green and Purple</option>
-        		<option value="red">Red and Blue</option>
-        		<option value="blue">Blue and Yellow</option>
-      		</select>
->>>>>>> 3deb71f (Added label)
->>>>>>> 02eaa6e (rebase)
-=======
 				</select></>}
->>>>>>> db6e6c2 (rebasing)
 		</main>
 
 	)
