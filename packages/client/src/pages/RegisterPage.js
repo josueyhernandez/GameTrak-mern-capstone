@@ -159,10 +159,14 @@ export default function RegisterPage() {
         <Button block size="lg" type="submit" className="button">Register</Button>
         </Form.Group>
 <<<<<<< HEAD
+<<<<<<< HEAD
         <label for="color" id="bottom">Please select a color:</label>
 =======
         <label for="color">Please select a color:</label>
 >>>>>>> 02eaa6e (rebase)
+=======
+        <label for="color" id="bottom">Please select a color:</label>
+>>>>>>> db6e6c2 (rebasing)
         <select id="color" onChange={setColor}>
           <option value="green">Green and Purple</option>
           <option value="red">Red and Blue</option>

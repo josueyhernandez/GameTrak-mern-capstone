@@ -134,11 +134,7 @@ export default function SkillsPage() {
 
 
 
-<<<<<<< HEAD
             <label for="color" id="bottom">Please select a color:</label>
-=======
-            <label for="color">Please select a color:</label>
->>>>>>> 02eaa6e (rebase)
             <select id="color" onChange={setColor}>
                 <option value="green">Green and Purple</option>
                 <option value="red">Red and Blue</option>
