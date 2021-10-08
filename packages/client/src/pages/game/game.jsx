@@ -248,11 +248,12 @@ export default function GamesPage(props) {
 
 
 			</div>
-			<select name="color" onChange={setColor}>
-				<option value="green">Green and Purple</option>
-				<option value="red">Red and Blue</option>
-				<option value="blue">Blue and Yellow</option>
-			</select>
+			<label for="color">Please select a color:</label>
+      		<select id="color" onChange={setColor}>
+        		<option value="green">Green and Purple</option>
+        		<option value="red">Red and Blue</option>
+        		<option value="blue">Blue and Yellow</option>
+      		</select>
 		</main>
 
 	)

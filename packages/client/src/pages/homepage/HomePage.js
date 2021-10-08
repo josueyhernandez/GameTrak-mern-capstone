@@ -118,7 +118,8 @@ export default function HomePage(props) {
             {loginStatus === 1 && <div>LOGIN FAILED</div>} */}
             {/* <Button onClick = {testButton}>t</Button> */}
           </Form>
-          <select name="color" onChange={setColor}>
+          <label for="color">Please select a color:</label>
+          <select id="color" onChange={setColor}>
             <option value="green">Green and Purple</option>
             <option value="red">Red and Blue</option>
             <option value="blue">Blue and Yellow</option>
