@@ -247,6 +247,7 @@ export default function CreatePage() {
                     </div>
                 </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
                 <div>
                     {!clickedSubmit && <button class="characterPage" onClick={() => window.location.replace("/character")}>Character Page</button>}
                 </div>
@@ -269,6 +270,8 @@ export default function CreatePage() {
                 <option value="blue">Blue and Yellow</option>
             </select>
 =======
+=======
+>>>>>>> 02eaa6e (rebase)
                 <ToastContainer
                     position="top-right"
                     autoClose={5000}
@@ -293,7 +296,33 @@ export default function CreatePage() {
                     }}>Go Back To Login</button> */}
                 </div>}
 
+<<<<<<< HEAD
 >>>>>>> 4e90ea7 (implementetd json web token)
+=======
+=======
+                <div>
+                    {!clickedSubmit && <button class="characterPage" onClick={() => window.location.replace("/character")}>Character Page</button>}
+                </div>
+            </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+            />
+            <label for="color">Please select a color:</label>
+            <select id="color" onChange={setColor}>
+                <option value="green">Green and Purple</option>
+                <option value="red">Red and Blue</option>
+                <option value="blue">Blue and Yellow</option>
+            </select>
+>>>>>>> 3deb71f (Added label)
+>>>>>>> 02eaa6e (rebase)
         </main>
     )
 }

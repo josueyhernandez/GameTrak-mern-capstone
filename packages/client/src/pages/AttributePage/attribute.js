@@ -215,6 +215,7 @@ export default function AttributePage() {
                 pauseOnHover
             />
 <<<<<<< HEAD
+<<<<<<< HEAD
             
             <label for="color" id="bottom">Please select a color:</label>
             <select id="color" onChange={setColor}>
@@ -222,6 +223,11 @@ export default function AttributePage() {
 
             <select name="color" onChange={setColor}>
 >>>>>>> 4e90ea7 (implementetd json web token)
+=======
+            
+            <label for="color">Please select a color:</label>
+            <select id="color" onChange={setColor}>
+>>>>>>> 02eaa6e (rebase)
                 <option value="green">Green and Purple</option>
                 <option value="red">Red and Blue</option>
                 <option value="blue">Blue and Yellow</option>

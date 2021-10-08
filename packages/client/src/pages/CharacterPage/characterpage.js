@@ -223,6 +223,7 @@ export default function CharacterPage() {
 
                         </Form>}
                 </div>
+                <label for="color">Please select a color:</label>
                 <select name="color" onChange={setColor}>
                     <option value="green">Green and Purple</option>
                     <option value="red">Red and Blue</option>
