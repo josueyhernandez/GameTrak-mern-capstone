@@ -157,7 +157,7 @@ export default function RegisterPage() {
         <Button block size="lg"  className="button" onClick={goBack}>Back</Button>
         <Button block size="lg" type="submit" className="button">Register</Button>
         </Form.Group>
-        <label for="color">Please select a color:</label>
+        <label for="color" id="bottom">Please select a color:</label>
         <select id="color" onChange={setColor}>
           <option value="green">Green and Purple</option>
           <option value="red">Red and Blue</option>
