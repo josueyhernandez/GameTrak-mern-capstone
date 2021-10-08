@@ -168,3 +168,15 @@ body {
 .header-item:hover{
   border-bottom: double white 3px;
 }
+
+#color {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+#bottom {
+  position: absolute;
+  bottom: 24px;
+  right: 6px;
+}
