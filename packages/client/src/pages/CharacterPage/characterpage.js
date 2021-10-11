@@ -9,10 +9,9 @@ import { useProvideStyle } from 'hooks/useStyle';
 
 
 const initialChar = {
-    name: "SELECT A CHARACTER",
-    description: "SELECT A CHARACTER",
-    image: "SELECT A CHARACTER",
-    attributes: "",
+    name: null,
+    description: null,
+    image: null,
     id: null
 
 }
@@ -27,7 +26,9 @@ export default function CharacterPage() {
     const { state, dispatch } = useProvideUser()
     const colorScheme = useProvideStyle();
     const [validated, setValidated] = useState(false);
-
+    const [editName, setEditName] = useState(false)
+    const [editDescription, setEditDescription] = useState(false)
+    const [newName, setNewName] = useState("")
     async function validateToken() {
 
         if (state) {
@@ -65,9 +66,9 @@ export default function CharacterPage() {
         setCurrAttr([])
         if (e.target.value === "none") {
             setCurrentChar({
-                name: "SELECT A CHARACTER",
-                description: "SELECT A CHARACTER",
-                image: "SELECT A CHARACTER",
+                name: null,
+                description: null,
+                image: null,
                 id: null
             })
         } else {
@@ -179,7 +180,36 @@ export default function CharacterPage() {
                     {state.currentGame && <h1 class="game-title">{state.currentGame.name} Characters</h1>}
                 </div>
                 <div class="characterId">
-                    <div class="character-info">
+
+                    {currentChar.name !== null && <div class="character-info">
+                        {/* <div className="edit-character">
+                            <div className="edit-name" onClick={() => {
+                                if (!editName) {
+                                    setEditName(true)
+                                }else{
+                                    setEditName(false)
+                                }
+                            }}>Edit Character Name</div>
+                            <div className="edit-description" onClick = {()=>{
+                                if (!editDescription) {
+                                    setEditDescription(true)
+                                }else{
+                                    setEditDescription(false)
+                                }
+                            }}>Edit Character Description</div>
+                        </div> */}
+
+                        {/* {editName && <div className="edit-character">
+                            <div className="edit"><label for="name">Change Name </label>
+                                <input type="text" name="name" onChange={async (e) => {
+                                    setNewName(e.target.value)
+
+                                }}></input>
+                                <Button onClick={() => {
+                                    console.log(newName)
+                                }}>Submit</Button>
+                            </div>
+                        </div>} */}
                         <h2 class="characterName">{currentChar.name}</h2>
                         <p>Name: <span class="name">{currentChar.name}</span></p>
                         {/* <p>Gender: <span class="gender"></span></p> */}
@@ -193,7 +223,7 @@ export default function CharacterPage() {
 
                         </div>}
                         {currentChar.id !== null && <img height="400px" src={currentChar.image} alt="Choose a character" />}
-                    </div>
+                    </div>}
                     <div>
                         {(currAttr.length > 0) && currAttr.map(attribute => {
                             return (

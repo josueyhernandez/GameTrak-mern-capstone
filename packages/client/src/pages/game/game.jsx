@@ -74,6 +74,7 @@ export default function GamesPage(props) {
 					dispatch({
 						type: 'CHANGE_USER',
 						info: res.data.userFound,
+						token: state.token
 					})
 					// dispatch here res.data stuff
 				})
@@ -176,6 +177,7 @@ export default function GamesPage(props) {
 						dispatch({
 							type: 'LOGOUT',
 							info: "TEST",
+							token: state.token
 						})
 						window.location.replace("/")
 						// create a logout dispatch
@@ -217,6 +219,7 @@ export default function GamesPage(props) {
 											dispatch({
 												type: 'SELECT_GAME',
 												info: game,
+												token: state.token
 											})
 											window.location.replace("/character")
 										}
@@ -239,6 +242,7 @@ export default function GamesPage(props) {
 													dispatch({
 														type: 'CHANGE_USER',
 														info: state,
+														token: state.token
 													})
 												}
 
@@ -255,6 +259,7 @@ export default function GamesPage(props) {
 										dispatch({
 											type: 'CHANGE_USER',
 											info: user.data,
+											token: state.token
 										})
 										window.location.reload();
 

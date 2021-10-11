@@ -16,7 +16,41 @@
     display: flex;
     margin-top: 10px;
 }
+.edit-character{
+    display: flex;
+    justify-content: space-around;
+}
+.edit-name{
+    color: white;
+    margin-right: 8px;
+    background-color: rgb(2, 184, 190);
+    border: white solid 4px;
+    padding: 3px;
 
+}
+.edit-name:hover{
+    cursor: pointer;
+    color: gold;
+
+}
+.edit-description{
+    color: white;
+    margin-right: 8px;
+    background-color: rgb(255, 102, 0);
+    border: white solid 4px;
+    padding: 3px;
+
+}
+.edit-description:hover{
+    cursor: pointer;
+    color: gold;
+}
+.edit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 .game-title {
     text-align: center;
 }
