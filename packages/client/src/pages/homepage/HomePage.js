@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from "react-bootstrap/Form"
 import Button from "react-bootstrap/Button"
 // import { ToastContainer, toast } from "react-toastify" 
@@ -26,6 +26,13 @@ export default function HomePage(props) {
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
+  function loggedIn(){
+    console.log(state)
+    if(state.username){
+      window.location.replace("/games")
+    }
+  }
+  useEffect(loggedIn, [state])
   async function loginBackend() {
     await axios
       .post("/api/users/login", {
