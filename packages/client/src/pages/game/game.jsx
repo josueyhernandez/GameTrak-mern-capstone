@@ -169,7 +169,7 @@ export default function GamesPage(props) {
 				</div>
 			}
 			{state.currentGame && validated && <h4>You were previously working on the game, {state.currentGame.name} </h4>}
-			{validated && <Button onClick={validateToken}>TEST</Button>}
+			{/* {validated && <Button onClick={validateToken}>TEST</Button>} */}
 			{validated && <span className='game-maker'>
 				<div className="buttons">
 					<Button onClick={createGame}>New Game</Button>
