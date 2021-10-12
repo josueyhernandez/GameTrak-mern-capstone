@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button"
 import { useApiFetch } from "util/api"
 import LoadingSpinner from 'components/LoadingSpinner'
 import { FaExclamationCircle } from 'react-icons/fa'
-import "./HomePage.css" 
+import "./HomePage.css"
 import { useProvideUser } from 'hooks/globalStates'
 import image from "./profile.jpg";
 import { useProvideStyle } from 'hooks/useStyle';
@@ -18,7 +18,7 @@ export default function HomePage(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loginStatus, setLoginStatus] = useState(0);
-  const { state,dispatch, userReducer,} = useProvideUser()
+  const { state, dispatch, userReducer, } = useProvideUser()
   const colorScheme = useProvideStyle();
 
   document.body.setAttribute("id", colorScheme.getStyle())
@@ -26,10 +26,27 @@ export default function HomePage(props) {
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
-  function loggedIn(){
+  async function loggedIn() {
     console.log(state)
-    if(state.username){
-      window.location.replace("/games")
+    if (state.username && state.token) {
+      await axios
+        .post('/api/auth', {
+          token: state.token
+        })
+        .then((res) => {
+          console.log(res)
+          if(res.data){
+            window.location.replace("/games")
+          }else{
+            dispatch({
+							type: 'LOGOUT',
+							info: "TEST",
+							token: state.token
+						})
+          }
+        })
+        .catch((err) => {
+        })
     }
   }
   useEffect(loggedIn, [state])
@@ -48,11 +65,11 @@ export default function HomePage(props) {
             token: res.data.token
           })
           toast.success("Login Successful!")
-          
+
           window.location.replace("/games")
           console.log(state)
           setLoginStatus(2);
-          
+
         } else {
           toast.error("Invalid Information")
           setLoginStatus(1);
@@ -66,12 +83,12 @@ export default function HomePage(props) {
     loginBackend();
     event.preventDefault();
   }
-  async function testButton(){
-    
-     console.log(state)
+  async function testButton() {
+
+    console.log(state)
   }
 
-  function setColor(color){
+  function setColor(color) {
     console.log(color.target.value)
     colorScheme.setNewStyle(color.target.value)
     document.body.id = colorScheme.getStyle()
@@ -103,25 +120,25 @@ export default function HomePage(props) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-            <Button
-              block
-              size="lg"
-              type="submit"
-              className="button"
-              disabled={!validateForm()}
-            >
-              Login
-            </Button>
-            <Button
-              block
-              size="lg"
-              type="submit"
-              className="button"
-              onClick={() => window.location.replace("/register")}
-              variant="primary"
-            >
-              SignUp
-            </Button>
+              <Button
+                block
+                size="lg"
+                type="submit"
+                className="button"
+                disabled={!validateForm()}
+              >
+                Login
+              </Button>
+              <Button
+                block
+                size="lg"
+                type="submit"
+                className="button"
+                onClick={() => window.location.replace("/register")}
+                variant="primary"
+              >
+                SignUp
+              </Button>
             </Form.Group>
             {/* {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
             {loginStatus === 1 && <div>LOGIN FAILED</div>} */}
@@ -136,16 +153,16 @@ export default function HomePage(props) {
         </div>
       )}
       <ToastContainer
-                position="top-right"
-                autoClose={5000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-            />
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
     </main>
   );
 }
