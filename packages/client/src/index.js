@@ -13,24 +13,26 @@ import CreatePage from 'pages/CreateCharacter/create'
 import './index.css'
 import ProvideUser from "./hooks/globalStates"
 import Header from "./components/Header"
+import {AppRouter} from 'AppRouter'
 ReactDOM.render(
   <div id="body">
     <React.StrictMode>
       <ProvideUser>
         <BrowserRouter>
+          <AppRouter>
             {/* <Header/> */}
-          <Switch>
-            <Route exact path='/' component={HomePage} />
-            <Route exact path='/games' component={GamesPage} />
-            <Route exact path='/register' component={RegisterPage} />
-            <Route exact path="/character" component={CharacterPage} />
-            <Route exact path="/item" component={ItemPage} />
-            <Route exact path="/attributes" component={AttributePage} />
-            <Route exact path="/places" component={PlacesPage} />
-            <Route exact path="/skills" component={SkillsPage} />
-            <Route exact path="/create" component={CreatePage} />
-          </Switch>
-
+            <Switch>
+              <Route exact path='/' component={HomePage} />
+              <Route exact path='/games' component={GamesPage} />
+              <Route exact path='/register' component={RegisterPage} />
+              <Route exact path="/character" component={CharacterPage} />
+              <Route exact path="/item" component={ItemPage} />
+              <Route exact path="/attributes" component={AttributePage} />
+              <Route exact path="/places" component={PlacesPage} />
+              <Route exact path="/skills" component={SkillsPage} />
+              <Route exact path="/create" component={CreatePage} />
+            </Switch>
+          </AppRouter>
         </BrowserRouter>
       </ProvideUser>
     </React.StrictMode>
