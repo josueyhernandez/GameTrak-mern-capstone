@@ -9,7 +9,7 @@ const CharSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: "https://i0.kym-cdn.com/entries/icons/original/000/012/448/tumblr_mfpwn7pBuf1rzi1ugo1_500.png"
+    default: "https://i.ibb.co/4WVNh0X/character-default.jpg"
   },
   game: {
       type: ObjectId,

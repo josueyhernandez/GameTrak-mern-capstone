@@ -8,7 +8,7 @@ const GameSchema = new mongoose.Schema({
   },
   image: {
     type: String,
-    default: "https://f2.toyhou.se/file/f2-toyhou-se/images/38109973_cc7LzOANW48pVU2.jpg"
+    default: "https://i.ibb.co/JCmm9zr/newgame.jpg"
   },
   version:{
     type: Number
