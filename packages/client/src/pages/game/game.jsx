@@ -168,7 +168,7 @@ export default function GamesPage(props) {
 					}}>Go Back To Login</button> */}
 				</div>
 			}
-			{state.currentGame && validated && <h4>You were previously working on the game, {state.currentGame.name} </h4>}
+			{state.currentGame && validated && <h4 className='game-page'>You were previously working on the game, {state.currentGame.name} </h4>}
 			{/* {validated && <Button onClick={validateToken}>TEST</Button>} */}
 			{validated && <span className='game-maker'>
 				<div className="buttons">
@@ -210,9 +210,9 @@ export default function GamesPage(props) {
 						return (
 							// <a href={"/character"}>
 							<div value={game} key={game.id} className="game">
-								<div>{game.name}</div>
+								<div className = "game-name">{game.name}</div>
 								{/* <div>{game.id}</div> */}
-								<img height="125px" width="100px" src={game.image}></img>
+								<img className = "game-image" height="125px" width="100px" src={game.image}></img>
 								<div className="game-icons">
 									<div className="icon" onClick={
 										() => {

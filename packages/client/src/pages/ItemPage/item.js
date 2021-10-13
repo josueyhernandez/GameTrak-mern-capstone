@@ -99,7 +99,7 @@ export default function ItemsPage() {
                     <Form.Control onChange={(e) => {
                         setItemName(e.target.value)
                     }
-                    } type="text" itemholder="Enter Name For Item" />
+                    } type="text" placeholder="Enter Name For Item" />
                     <Form.Text className="text-muted">
                         You can list the items here!
                     </Form.Text>
@@ -107,7 +107,7 @@ export default function ItemsPage() {
                     <Form.Control onChange={(e) => {
                         setItemType(e.target.value)
                     }
-                    } type="text" itemholder="Enter Type For Item" />
+                    } type="text" placeholder="Enter Type For Item" />
                     <Form.Text className="text-muted">
                         You name the item-type here!
                     </Form.Text>
@@ -115,7 +115,7 @@ export default function ItemsPage() {
                     <Form.Control onChange={(e) => {
                         setItemDes(e.target.value)
                     }
-                    } type="text" itemholder="Enter Description For Item" />
+                    } type="text" placeholder="Enter Description For Item" />
                     <Form.Text className="text-muted">
                         You describe the item here!
                     </Form.Text>
