@@ -161,10 +161,6 @@ export default function CharacterPage() {
                     <label for="character">Select Character: </label>
                     <select name="characters" id="characters" class="characters" onChange={changeCharacter}>
                         <option value="none">None</option>
-                        {/* <option value="Scorpion">Scorpion</option>
-                    <option value="sub-zero">Sub-zero</option>
-                    <option value="liuKang">Liu Kang</option>
-                    <option value="sonya">Sonya Blade</option> */}
                         {state && charList.map(char => {
                             return (
                                 <option key={char._id} value={char._id}>{char.name}</option>
@@ -210,6 +206,7 @@ export default function CharacterPage() {
                                 }}>Submit</Button>
                             </div>
                         </div>} */}
+
                         <h2 class="characterName">{currentChar.name}</h2>
                         <p>Name: <span class="name">{currentChar.name}</span></p>
                         {/* <p>Gender: <span class="gender"></span></p> */}
@@ -222,6 +219,7 @@ export default function CharacterPage() {
                             <p>Description: {currentChar.description}</p>
 
                         </div>}
+
                         {currentChar.id !== null && <img height="400px" src={currentChar.image} alt="Choose a character" />}
                     </div>}
                     <div>

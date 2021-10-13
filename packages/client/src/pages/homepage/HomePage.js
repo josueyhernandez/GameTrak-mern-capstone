@@ -96,9 +96,9 @@ export default function HomePage(props) {
   return (
     <main>
       <h1>
-        <img src={image} alt="image"></img>
+        <img id = "homepage-image" src={image} alt="image"></img>
       </h1>
-      <h1>Welcome to GameTrak</h1>
+      <h1 id="title">Welcome to GameTrak</h1>
       {error && <h3 style={{ color: "red" }}>Error Loading Data: {error}</h3>}
       {isLoading && <LoadingSpinner></LoadingSpinner>}
       {!error && response && (
@@ -120,6 +120,7 @@ export default function HomePage(props) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+              <div >
               <Button
                 block
                 size="lg"
@@ -139,6 +140,7 @@ export default function HomePage(props) {
               >
                 SignUp
               </Button>
+              </div>
             </Form.Group>
             {/* {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
             {loginStatus === 1 && <div>LOGIN FAILED</div>} */}
