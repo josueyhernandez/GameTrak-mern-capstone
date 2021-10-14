@@ -45,13 +45,15 @@ export default function GamesPage(props) {
 		})
 	}
 	const changeGameImage = async (event) => {
-		const imageToUpload = event.target.files[0]
-		console.log(imageToUpload)
-		let formData = new FormData();
-		formData.append('image', imageToUpload);
-		const uploadedImage = await axios.post('/api/upload', formData)
-		console.log(uploadedImage.data);
-		setNewImage(uploadedImage.data)
+		// const imageToUpload = event.target.files[0]
+		let url = event.target.value
+		if(url){
+			setNewImage(url)
+		}else{
+			setNewImage()
+		}
+		console.log(event)
+		// setNewImage(uploadedImage.data)
 	}
 	async function createGame() {
 		// await axios
@@ -193,9 +195,9 @@ export default function GamesPage(props) {
 						onChange={changeName}
 					>
 					</Form.Control>
-					<Form.Label>Upload your image for the game here:</Form.Label>
+					<Form.Label>Upload your image with URL here:</Form.Label>
 					<Form.Control
-						type="file"
+						type="input"
 						name="game-image"
 
 						onChange={changeGameImage}

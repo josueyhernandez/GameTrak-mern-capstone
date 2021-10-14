@@ -103,13 +103,12 @@ export default function CreatePage() {
     }
     useEffect(findAttrB, [state])
     const changeCharacterImage = async (event) => {
-        const imageToUpload = event.target.files[0]
-        console.log(imageToUpload)
-        let formData = new FormData();
-        formData.append('image', imageToUpload);
-        const uploadedImage = await axios.post('/api/upload', formData)
-        console.log(uploadedImage.data);
-        setImage(uploadedImage.data)
+        let url = event.target.value
+		if(url){
+			setImage(url)
+		}else{
+			setImage()
+		}
     }
     function test() {
         console.log(state)
@@ -173,8 +172,8 @@ export default function CreatePage() {
                                 <label for="description">Description: </label>
                                 <textarea type="textarea" name="description"></textarea><br></br>
                             </div>
-                            <label for="upload">Upload an image for your character here!</label>
-                            <input type="file" onChange={changeCharacterImage} /><br />
+                            <label for="upload">Upload a character image URL here!</label>
+                            <input type="input" onChange={changeCharacterImage} /><br />
                             {!clickedSubmit && <input type="submit" id="submit" value="Submit" onClick={
                                 async (e) => {
                                     toast.success("Your new character is being created!")
