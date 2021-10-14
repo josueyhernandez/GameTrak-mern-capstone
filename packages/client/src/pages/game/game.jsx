@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import GameData from './data';
 import { useProvideUser, } from 'hooks/globalStates';
 import { useState, useEffect } from 'react';
 import { useProvideStyle } from 'hooks/useStyle';
@@ -26,7 +25,6 @@ export default function GamesPage(props) {
 				})
 				.then((res) => {
 					setValidated(res.data._id === state.id)
-					console.log(res.data)
 				})
 				.catch((err) => {
 					setValidated(false)
@@ -34,16 +32,7 @@ export default function GamesPage(props) {
 		}
 	}
 	useEffect(validateToken, [state])
-	async function test() {
-		console.log(GameData.type)
-		console.log(state)
-		console.log(state.games)
-		state.games.map(async function (id) {
-			await axios
-				.get(`/api/games/${id}`)
 
-		})
-	}
 	const changeGameImage = async (event) => {
 		// const imageToUpload = event.target.files[0]
 		let url = event.target.value
@@ -52,18 +41,9 @@ export default function GamesPage(props) {
 		}else{
 			setNewImage()
 		}
-		console.log(event)
 		// setNewImage(uploadedImage.data)
 	}
 	async function createGame() {
-		// await axios
-		// .post("/api/games",{
-		// 	title: "untitledddd",
-		// 	owner: state.username,
-		// })
-		// .then(res => {
-		// 	console.log(res.data)
-		// }).catch((err=>console.log(err)))
 		if (game.length > 0) {
 			await axios
 				.put("/api/users/add-game", {
@@ -72,7 +52,6 @@ export default function GamesPage(props) {
 					image: newImage
 				})
 				.then(res => {
-					console.log(res)
 					dispatch({
 						type: 'CHANGE_USER',
 						info: res.data.userFound,
@@ -90,7 +69,6 @@ export default function GamesPage(props) {
 					image: newImage
 				})
 				.then(res => {
-					console.log(res)
 					dispatch({
 						type: 'CHANGE_USER',
 						info: res.data.userFound,
@@ -123,35 +101,25 @@ export default function GamesPage(props) {
 				setList([...listOfGames])
 			}
 			)
-
 		}
+	}
 
-		console.log("List Of Games ", listOfGames)
-	}
-	function showMe(e) {
-		dispatch({
-			type: 'SELECT_GAME',
-			info: "TEST",
-		})
-		console.log(e)
-	}
 	function changeName(e) {
 		setGame(e.target.value)
 	}
+
 	async function findUser() {
 		let user = null
 		await axios.post("/api/users/refresh/", {
 			username: state.username
 		})
 			.then(res => {
-				console.log(res)
 				user = res
 			})
 		return user
 	}
 
 	function setColor(color) {
-		console.log(color.target.value)
 		colorScheme.setNewStyle(color.target.value)
 		document.body.id = colorScheme.getStyle()
 	}
@@ -254,10 +222,8 @@ export default function GamesPage(props) {
 											username: state.username
 										})
 											.then(res => {
-												// console.log(res)
 												user = res
 											})
-										console.log(user)
 										dispatch({
 											type: 'CHANGE_USER',
 											info: user.data,

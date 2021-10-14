@@ -29,9 +29,7 @@
     align-items: center;
     padding: 2px;
 }
-#password{
-    margin-bottom: 10px;
-}
+
 #homepage-buttons{
     display: flex;
     color: white;

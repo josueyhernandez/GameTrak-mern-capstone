@@ -33,28 +33,22 @@ export default function RegisterPage() {
   const router = useRouter()
   const axios = require('axios');
   const colorScheme = useProvideStyle();
-
-  console.log(colorScheme)
   //Sets Id of body
   document.body.setAttribute("id", colorScheme.getStyle())
 
   const handleInputChange = (event) => {
-    console.log(event)
     setData({
       ...data,
       [event.target.name]: event.target.value,
     })
-    console.log(data)
   }
 
   const handleSignup = async (event) => {
     const form = event.currentTarget
     event.preventDefault()
 
-    console.log(data.password === document.getElementById("confirm").value)
     if (!(data.password === document.getElementById("confirm").value)) {
       toast.error("Passwords do not match")
-      console.log(data)
     } else {
       setData({
         ...data,
@@ -83,6 +77,7 @@ export default function RegisterPage() {
 
   }
   async function submitRegister() {
+
     if (!data.username.includes(" ") && data.username.length <= 20) {
       await axios.post('/api/users', {
         username: data.username,
@@ -102,6 +97,7 @@ export default function RegisterPage() {
             toast.error("The username or email already exists")
           }
 
+
         })
     } else {
       toast.error("The username contains invalid characters or is over 20 characters")
@@ -113,7 +109,6 @@ export default function RegisterPage() {
 
   //Changes color scheme whenever color is selected
   function setColor(color){
-    console.log(color.target.value)
     colorScheme.setNewStyle(color.target.value)
     document.body.id = colorScheme.getStyle()
   }
