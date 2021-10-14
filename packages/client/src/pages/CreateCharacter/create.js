@@ -24,14 +24,12 @@ export default function CreatePage() {
     const [validated, setValidated] = useState(true);
     async function validateToken() {
 		if (state) {
-            console.log("test")
 			await axios
 				.post('/api/auth', {
 					token: state.token
 				})
 				.then((res) => {
 					setValidated(res.data._id === state.id)
-					console.log(res.data)
 				})
                 .catch((err)=>{
                     setValidated(false)
@@ -52,7 +50,6 @@ export default function CreatePage() {
     }
     async function findAttrA() {
         if (state.currentGame) {
-            console.log(state.currentGame.id)
             await axios
                 .get(`/api/attr/attra/${state.currentGame.id}`)
                 .then((res) => {
@@ -69,7 +66,6 @@ export default function CreatePage() {
                             }
                         )
                     })
-                    console.log(newAttrList)
                     setAttrAList2(newAttrList)
                     setAttrAList(res.data.filter(attribute => attribute.owned === false))
                 })
@@ -78,7 +74,6 @@ export default function CreatePage() {
     useEffect(findAttrA, [state])
     async function findAttrB() {
         if (state.currentGame) {
-            console.log(state.currentGame.id)
             await axios
                 .get(`/api/attr/attrB/${state.currentGame.id}`)
                 .then((res) => {
@@ -95,7 +90,6 @@ export default function CreatePage() {
                             }
                         )
                     })
-                    console.log(res.data)
                     setAttrBList2(newAttrList)
                     setAttrBList(res.data.filter(attribute => attribute.owned === false))
                 })
@@ -110,12 +104,8 @@ export default function CreatePage() {
 			setImage()
 		}
     }
-    function test() {
-        console.log(state)
-    }
 
     function setColor(color) {
-        console.log(color.target.value)
         colorScheme.setNewStyle(color.target.value)
         document.body.id = colorScheme.getStyle()
     }
@@ -139,8 +129,6 @@ export default function CreatePage() {
                                     <div className="attribute-input">
                                         <label for={attribute.name}>{attribute.name}: </label>
                                         <input onChange={(e) => {
-                                            //    let targetAtt = attrAList.find(att=>att._id = attribute._id);
-                                            console.log(e)
                                             setAttrAList2({
                                                 ...attrAList2,
                                                 [attribute.name]: e.target.value
@@ -157,7 +145,6 @@ export default function CreatePage() {
                                     <div className="attribute-input">
                                         <label for={attribute.name}>{attribute.name}: </label>
                                         <input type="number" name={attribute.name} onChange={(e) => {
-                                            console.log(e)
                                             setAttrBList2({
                                                 ...attrBList2,
                                                 [attribute.name]: e.target.value
@@ -180,7 +167,6 @@ export default function CreatePage() {
                                     setClickedSubmit(true)
                                     let newCharId
                                     e.preventDefault()
-                                    console.log(image)
                                     await axios.post
                                         ("/api/chars/", {
                                             name: input?.name,
@@ -188,9 +174,7 @@ export default function CreatePage() {
                                             game: state.currentGame.id,
                                             image
                                         }).then((res) => {
-                                            console.log(res.data)
                                             newCharId = res.data._id
-                                            console.log(newCharId)
                                         })
                                     for (let key in attrAList2) {
                                         await axios
@@ -210,7 +194,7 @@ export default function CreatePage() {
                                                         attribute: attrId
                                                     })
                                                     .then(res => {
-                                                        console.log(res.data)
+                                                      
                                                     })
                                             })
                                     }
@@ -232,7 +216,7 @@ export default function CreatePage() {
                                                         attribute: attrId
                                                     })
                                                     .then(res => {
-                                                        console.log(res.data)
+                                                       
                                                     })
                                             })
                                     }

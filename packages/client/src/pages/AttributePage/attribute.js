@@ -20,14 +20,12 @@ export default function AttributePage() {
     const [validated, setValidated] = useState(true);
     async function validateToken() {
 		if (state) {
-            console.log("test")
 			await axios
 				.post('/api/auth', {
 					token: state.token
 				})
 				.then((res) => {
 					setValidated(res.data._id === state.id)
-					console.log(res.data)
 				})
                 .catch((err)=>{
                     setValidated(false)
@@ -41,18 +39,15 @@ export default function AttributePage() {
     document.body.setAttribute("id", colorScheme.getStyle())
 
     function setColor(color) {
-        console.log(color.target.value)
         colorScheme.setNewStyle(color.target.value)
         document.body.id = colorScheme.getStyle()
     }
     //function goes here
     async function findAttrA() {
         if (state.currentGame) {
-            console.log(state.currentGame.id)
             await axios
                 .get(`/api/attr/attra/${state.currentGame.id}`)
                 .then((res) => {
-                    console.log(res.data)
                     setAttrAList(res.data)
                 })
         }
@@ -60,11 +55,9 @@ export default function AttributePage() {
     useEffect(findAttrA, [state])
     async function findAttrB() {
         if (state.currentGame) {
-            console.log(state.currentGame.id)
             await axios
                 .get(`/api/attr/attrB/${state.currentGame.id}`)
                 .then((res) => {
-                    console.log(res.data)
                     setAttrBList(res.data)
                 })
         }
@@ -73,7 +66,6 @@ export default function AttributePage() {
     async function submitAttr() {
         let charArray
         let attrId
-        console.log(state.currentGame.id)
         if (attrType === "") {
             toast.error("Select An Attribute Type")
         } else if (attrName === "") {
@@ -108,7 +100,6 @@ export default function AttributePage() {
                                         attribute: attrId
                                     })
                                     .then(res => {
-                                        console.log(res.data)
                                     })
                             })
 

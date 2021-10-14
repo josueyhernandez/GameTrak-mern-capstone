@@ -17,7 +17,6 @@ export default function ItemsPage() {
     const [validated, setValidated] = useState(false);
 
     async function validateToken() {
-
         if (state) {
             await axios
                 .post('/api/auth', {
@@ -25,14 +24,12 @@ export default function ItemsPage() {
                 })
                 .then((res) => {
                     setValidated(res.data._id === state.id)
-                    console.log(res.data)
                 })
                 .catch((err) => {
                     setValidated(false)
                 })
         }
         else {
-            console.log(state)
             setValidated(false)
         }
     }
@@ -41,7 +38,6 @@ export default function ItemsPage() {
     document.body.setAttribute("id", colorScheme.getStyle())
 
     function setColor(color) {
-        console.log(color.target.value)
         colorScheme.setNewStyle(color.target.value)
         document.body.id = colorScheme.getStyle()
     }
@@ -55,7 +51,6 @@ export default function ItemsPage() {
                 game: state.currentGame.id
             })
             .then((res) => {
-                console.log(res)
                 showItems()
             })
     }

@@ -20,6 +20,8 @@ export default function HomePage(props) {
   const [loginStatus, setLoginStatus] = useState(0);
   const { state, dispatch, userReducer, } = useProvideUser()
   const colorScheme = useProvideStyle();
+  const [userValid, setUserValid] = useState(false)
+  const [passValid, setPassValid] = useState(false)
 
   document.body.setAttribute("id", colorScheme.getStyle())
 
@@ -27,22 +29,22 @@ export default function HomePage(props) {
     return username.length > 0 && password.length > 0;
   }
   async function loggedIn() {
-    console.log(state)
+   
     if (state.username && state.token) {
       await axios
         .post('/api/auth', {
           token: state.token
         })
         .then((res) => {
-          console.log(res)
-          if(res.data){
+         
+          if (res.data) {
             window.location.replace("/games")
-          }else{
+          } else {
             dispatch({
-							type: 'LOGOUT',
-							info: "TEST",
-							token: state.token
-						})
+              type: 'LOGOUT',
+              info: "TEST",
+              token: state.token
+            })
           }
         })
         .catch((err) => {
@@ -51,13 +53,13 @@ export default function HomePage(props) {
   }
   useEffect(loggedIn, [state])
   async function loginBackend() {
+    //if (input 1.value === "" || input2.value === ""  ) { toast.error, return and exit function} else {the stuff you already have}
     await axios
       .post("/api/users/login", {
         username,
         password,
       })
       .then(function (res) {
-        console.log(res.data)
         if (res.data.valid === true) {
           dispatch({
             type: 'CHANGE_USER',
@@ -65,82 +67,96 @@ export default function HomePage(props) {
             token: res.data.token
           })
           toast.success("Login Successful!")
-
           window.location.replace("/games")
-          console.log(state)
-          setLoginStatus(2);
-
         } else {
           toast.error("Invalid Information")
           setLoginStatus(1);
         }
       })
       .catch(function (err) {
-        console.log(err);
       });
   }
   function handleSubmit(event) {
-    loginBackend();
     event.preventDefault();
+    loginBackend();
   }
-  async function testButton() {
 
-    console.log(state)
-  }
 
   function setColor(color) {
-    console.log(color.target.value)
     colorScheme.setNewStyle(color.target.value)
     document.body.id = colorScheme.getStyle()
   }
   return (
     <main>
       <h1>
-        <img id = "homepage-image" src={image} alt="image"></img>
+        <img id="homepage-image" src={image} alt="image"></img>
       </h1>
       <h1 id="title">Welcome to GameTrak</h1>
       {error && <h3 style={{ color: "red" }}>Error Loading Data: {error}</h3>}
       {isLoading && <LoadingSpinner></LoadingSpinner>}
       {!error && response && (
         <div className="login">
-          <Form onSubmit={handleSubmit}>
+          <Form validated = {userValid} onSubmit={(event) => handleSubmit(event)}>
             <Form.Group size="lg" controlId="username">
               <Form.Label>Username: </Form.Label>
               <Form.Control
                 autoFocus
-                type="username"
+                required
+                type="text"
                 value={username}
-                onChange={(e) => setUsername(e.target.value)}
+
+                onChange={(e) => {
+                  setUsername(e.target.value)
+                if(e.target.value){
+                  setUserValid(true)
+                }else{
+                  setUserValid(false)
+                }
+                }}
               />
+              {!userValid && <Form.Control.Feedback data-validity = {userValid} type="invalid">
+              <div id = "feed">Enter a username</div>
+              </Form.Control.Feedback>}
             </Form.Group>
             <Form.Group size="lg" controlId="password" className="passWordForm">
               <Form.Label className="password">Password: </Form.Label>
               <Form.Control
+                required
                 type="password"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                onChange={(e) => {
+                  setPassword(e.target.value)
+                  if(e.target.value){
+                    setPassValid(true)
+                  }else{
+                    setPassValid(false)
+                  }
+                }}
               />
-              <div >
-              <Button
-                block
-                size="lg"
-                type="submit"
-                className="button"
-                disabled={!validateForm()}
-              >
-                Login
-              </Button>
-              <Button
-                block
-                size="lg"
-                type="submit"
-                className="button"
-                onClick={() => window.location.replace("/register")}
-                variant="primary"
-              >
-                SignUp
-              </Button>
-              </div>
+              {!passValid && <Form.Control.Feedback data-validity = {passValid} type="invalid">
+                <div id = "feed">Enter a password</div>
+              </Form.Control.Feedback>}
+              <br/>
+                <Button
+                  block
+                  size="lg"
+                  type="submit"
+                  className="button"
+                  disabled={!validateForm()}
+                >
+                  Login
+                </Button>
+                <Button
+                  block
+                  size="lg"
+                  type="submit"
+                  className="button"
+                  onClick={() => window.location.replace("/register")}
+                  variant="primary"
+                >
+                  SignUp
+                </Button>
+
             </Form.Group>
             {/* {loginStatus === 2 && <div>LOGIN SUCCESS</div>}
             {loginStatus === 1 && <div>LOGIN FAILED</div>} */}

@@ -38,23 +38,18 @@ export default function CharacterPage() {
                 })
                 .then((res) => {
                     setValidated(res.data._id === state.id)
-                    console.log(res.data)
                 })
                 .catch((err) => {
                     setValidated(false)
                 })
         }
         else {
-            console.log(state)
             setValidated(false)
         }
     }
     useEffect(validateToken, [state])
     document.body.setAttribute("id", colorScheme.getStyle())
 
-    function testButton() {
-        console.log(state)
-    }
     async function selectCharacter() {
         if (state.currentGame !== null) {
             axios.get(`/api/chars/${state.currentGame.id}`)
@@ -81,7 +76,6 @@ export default function CharacterPage() {
                         attributes: res.data.attributes,
                         id: res.data._id
                     })
-                    console.log(res)
                     obtainAttrInfo(res.data.attributes)
                 })
 
@@ -94,9 +88,7 @@ export default function CharacterPage() {
             attrs.map(async attributeId => {
                 await axios.get(`/api/attr/${attributeId}`)
                     .then((res) => {
-                        console.log(res.data)
                         setCurrAttr(currAttr => currAttr.concat(res.data))
-
                     })
             })
 
@@ -116,7 +108,7 @@ export default function CharacterPage() {
             attribute: selectedAttr.info._id,
             newValue: editVal
         })
-            .then(res => console.log(res.data))
+
         axios.get(`/api/chars/character/${currentChar.id}`)
             .then((res) => {
                 obtainAttrInfo(res.data.attributes)
@@ -125,7 +117,6 @@ export default function CharacterPage() {
     useEffect(selectCharacter, [state])
 
     function setColor(color) {
-        console.log(color.target.value)
         colorScheme.setNewStyle(color.target.value)
         document.body.id = colorScheme.getStyle()
     }
@@ -178,48 +169,12 @@ export default function CharacterPage() {
                 <div class="characterId">
 
                     {currentChar.name !== null && <div class="character-info">
-                        {/* <div className="edit-character">
-                            <div className="edit-name" onClick={() => {
-                                if (!editName) {
-                                    setEditName(true)
-                                }else{
-                                    setEditName(false)
-                                }
-                            }}>Edit Character Name</div>
-                            <div className="edit-description" onClick = {()=>{
-                                if (!editDescription) {
-                                    setEditDescription(true)
-                                }else{
-                                    setEditDescription(false)
-                                }
-                            }}>Edit Character Description</div>
-                        </div> */}
-
-                        {/* {editName && <div className="edit-character">
-                            <div className="edit"><label for="name">Change Name </label>
-                                <input type="text" name="name" onChange={async (e) => {
-                                    setNewName(e.target.value)
-
-                                }}></input>
-                                <Button onClick={() => {
-                                    console.log(newName)
-                                }}>Submit</Button>
-                            </div>
-                        </div>} */}
-
                         <h2 class="characterName">{currentChar.name}</h2>
                         <p>Name: <span class="name">{currentChar.name}</span></p>
-                        {/* <p>Gender: <span class="gender"></span></p> */}
-                        {/* <p>Attributes: <span class="attributes"></span></p>
-                    <p>Strength: </p>
-                    <p>Agility: </p>
-                    <p>Endurance: </p>
-                    <p>Skills: </p> */}
                         {state.currentGame && <div class="description">
                             <p>Description: {currentChar.description}</p>
 
                         </div>}
-
                         {currentChar.id !== null && <img height="400px" src={currentChar.image} alt="Choose a character" />}
                     </div>}
                     <div>

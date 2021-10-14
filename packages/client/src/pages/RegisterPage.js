@@ -33,28 +33,22 @@ export default function RegisterPage() {
   const router = useRouter()
   const axios = require('axios');
   const colorScheme = useProvideStyle();
-
-  console.log(colorScheme)
   //Sets Id of body
   document.body.setAttribute("id", colorScheme.getStyle())
 
   const handleInputChange = (event) => {
-    console.log(event)
     setData({
       ...data,
       [event.target.name]: event.target.value,
     })
-    console.log(data)
   }
 
   const handleSignup = async (event) => {
     const form = event.currentTarget
     event.preventDefault()
 
-    console.log(data.password === document.getElementById("confirm").value)
     if (!(data.password === document.getElementById("confirm").value)) {
       toast.error("Passwords do not match")
-      console.log(data)
     } else {
       setData({
         ...data,
@@ -88,7 +82,6 @@ export default function RegisterPage() {
       password: data.password,
       email: data.email
     }).then(res => {
-      console.log(res.data.token)
       toast.success("Registration successful!")
       setTimeout(function () {
         window.location.replace("/")
@@ -96,7 +89,6 @@ export default function RegisterPage() {
     }
     )
       .catch(err => {
-        console.log(err.response.status)
         if (err.response.status === 409) {
           toast.error("The username or email already exists")
         }
@@ -109,7 +101,6 @@ export default function RegisterPage() {
 
   //Changes color scheme whenever color is selected
   function setColor(color){
-    console.log(color.target.value)
     colorScheme.setNewStyle(color.target.value)
     document.body.id = colorScheme.getStyle()
   }

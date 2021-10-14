@@ -13,7 +13,6 @@ const initialState = {
 const userReducer = (state, action) => {
     switch (action.type) {
         case 'CHANGE_USER':
-            console.log(action)
             localStorage.setItem('User', JSON.stringify(action.info))
             localStorage.setItem('Token', JSON.stringify(action.token))
             return {
@@ -69,7 +68,6 @@ export const useProvideUser = () => {
         const savedUser = JSON.parse(localStorage.getItem('User')) || false
         const savedToken = JSON.parse(localStorage.getItem('Token')) || false
         const savedCurrentGame = JSON.parse(localStorage.getItem('CurrentGame')) || false
-        console.log(savedUser)
         if (savedUser) {
             dispatch({
                 type: 'CHANGE_USER',

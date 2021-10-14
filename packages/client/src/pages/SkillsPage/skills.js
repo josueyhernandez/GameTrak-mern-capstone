@@ -17,14 +17,12 @@ export default function SkillsPage() {
     const [validated, setValidated] = useState(true);
     async function validateToken() {
 		if (state) {
-            console.log("test")
 			await axios
 				.post('/api/auth', {
 					token: state.token
 				})
 				.then((res) => {
 					setValidated(res.data._id === state.id)
-					console.log(res.data)
 				})
                 .catch((err)=>{
                     setValidated(false)
@@ -43,7 +41,6 @@ export default function SkillsPage() {
         }
     }
     function setColor(color) {
-        console.log(color.target.value)
         colorScheme.setNewStyle(color.target.value)
         document.body.id = colorScheme.getStyle()
     }
@@ -57,7 +54,6 @@ export default function SkillsPage() {
                 game: state.currentGame.id
             })
             .then((res) => {
-                console.log(res)
                 showSkills()
             })
     }
