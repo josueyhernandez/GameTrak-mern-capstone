@@ -83,7 +83,7 @@ export default function RegisterPage() {
 
   }
   async function submitRegister() {
-    if (!data.username.includes(" ")) {
+    if (!data.username.includes(" ") || data.username.length() <= 20) {
       await axios.post('/api/users', {
         username: data.username,
         password: data.password,
@@ -104,7 +104,7 @@ export default function RegisterPage() {
 
         })
     } else {
-      toast.error("The username contains invalid characters")
+      toast.error("The username contains invalid characters or is over 20 characters")
     }
   }
   function goBack(){
