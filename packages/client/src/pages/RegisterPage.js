@@ -83,25 +83,29 @@ export default function RegisterPage() {
 
   }
   async function submitRegister() {
-    await axios.post('/api/users', {
-      username: data.username,
-      password: data.password,
-      email: data.email
-    }).then(res => {
-      console.log(res.data.token)
-      toast.success("Registration successful!")
-      setTimeout(function () {
-        window.location.replace("/")
-      }, 1500);
-    }
-    )
-      .catch(err => {
-        console.log(err.response.status)
-        if (err.response.status === 409) {
-          toast.error("The username or email already exists")
-        }
+    if (!data.username.includes(" ") || data.username.length() <= 20) {
+      await axios.post('/api/users', {
+        username: data.username,
+        password: data.password,
+        email: data.email
+      }).then(res => {
+        console.log(res.data.token)
+        toast.success("Registration successful!")
+        setTimeout(function () {
+          window.location.replace("/")
+        }, 1500);
+      }
+      )
+        .catch(err => {
+          console.log(err.response.status)
+          if (err.response.status === 409) {
+            toast.error("The username or email already exists")
+          }
 
-      })
+        })
+    } else {
+      toast.error("The username contains invalid characters or is over 20 characters")
+    }
   }
   function goBack(){
     window.location.replace("/")
